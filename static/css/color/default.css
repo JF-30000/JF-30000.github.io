@@ -1,0 +1,79 @@
+::selection {
+	/* background-color:#00c6ff; */
+	background-color: #748D92;
+	color: #fff;
+}
+
+::-moz-selection {
+	/* background-color:#00c6ff; */
+	background-color: #748D92;
+	color: #fff;
+}
+
+
+
+.theme-color {
+	/* color:#00c6ff; */
+	color: #748D92;
+}
+
+
+.theme-after-bg:after,
+.btn-theme,
+.theme-bg {
+	/* background:#00c6ff; */
+	background: #748D92;
+}
+
+
+.btn-theme {
+	/* border-color:#00c6ff; */
+	border-color: #748D92;
+}
+
+.portfolio-hover-01 .action-btn a:hover,
+.portfolio-filter li:hover,
+.portfolio-filter li.active,
+.owl-dots .owl-dot.active,
+.m-btn-theme,
+.title-section h2:after,
+.m-btn-white:hover,
+.theme-after:after,
+.theme-g-bg {
+	/* fallback for old browsers */
+	/* background: #00c6ff;   */
+	background: #748D92;
+	/* Chrome 10-25, Safari 5.1-6 */
+	/* background: -webkit-linear-gradient(to right, #0072ff, #00c6ff);   */
+	background: -webkit-linear-gradient(to right, #748D92, #124E66);
+	/* Chrome 10-25, Safari 5.1-6 */
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	/* background: linear-gradient(to right, #0072ff, #00c6ff);  */
+	background: linear-gradient(to right, #748D92, #124E66);
+}
+
+
+/*Reverce*/
+.m-btn-theme:hover {
+	/* fallback for old browsers */
+	/* background: #0072ff; */
+	background: #748D92;
+	/* Chrome 10-25, Safari 5.1-6 */
+	/* background: -webkit-linear-gradient(to right, #00c6ff, #0072ff);   */
+	background: -webkit-linear-gradient(to right, #748D92, #124E66);
+	/* background: linear-gradient(to right, #00c6ff, #0072ff); */
+	background: linear-gradient(to right, #748D92, #124E66);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.home-banner .avtar-img,
+.m-btn-theme:hover,
+.m-btn-white:hover {
+	box-shadow: 0px 15px 20px rgba(5, 117, 230, 0.4);
+}
+
+@media (max-width: 991px) {
+	.header {
+		background: #748D92;
+	}
+}

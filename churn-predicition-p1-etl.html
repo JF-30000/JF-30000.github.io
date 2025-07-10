@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>Jim Fischer</title>
+
+		<!-- Font Icon -->
+		<link href="static/plugin/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+		<link href="static/plugin/themify-icons/themify-icons.css" rel="stylesheet" />
+
+		<!-- Plugin CSS -->
+		<link href="static/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="static/plugin/owl-carousel/css/owl.carousel.min.css" rel="stylesheet" />
+		<link href="static/plugin/magnific/magnific-popup.css" rel="stylesheet" />
+
+		<!-- Theme Style -->
+		<link href="static/css/styles.css" rel="stylesheet" />
+		<link href="static/css/color/color-1.css" rel="stylesheet" id="color_theme" />
+		<link rel="icon" href="favicon.ico" />
+	</head>
+
+	<body data-spy="scroll" data-target="#navbarRyan" data-offset="98">
+		<!-- Loading Spinner -->
+		<div id="loading">
+			<div class="load-circle"><span class="one"></span></div>
+		</div>
+
+		<!-- Header -->
+		<header>
+			<nav class="navbar header-nav header-nav fixed-top navbar-expand-lg">
+				<div class="container">
+					<a class="navbar-brand" href="index.html">Jim <span class="theme-bg"></span></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarRyan">
+						<span></span><span></span><span></span>
+					</button>
+					<div class="collapse navbar-collapse justify-content-end" id="navbarRyan">
+						<ul class="navbar-nav">
+							<li><a class="nav-link" href="index.html#home">Home</a></li>
+							<li><a class="nav-link" href="index.html#portfolio">Projects</a></li>
+							<li><a class="nav-link" href="index.html#aboutus">About</a></li>
+							<li><a class="nav-link" href="index.html#contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<!-- Main -->
+		<main>
+			<section class="page-title" style="background-image: url(static/img/)">
+				<div class="container"></div>
+			</section>
+
+			<section class="section blog-lising">
+				<div class="container">
+					<div class="row">
+						<!-- Content Area -->
+						<div class="col-12 col-md-12 col-lg-9 p-50px-r md-p-15px-r">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html#portfolio">Projects</a></li>
+									<li class="breadcrumb-item">
+										<a href="churn-predicition.html">Churn Prediction</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">ETL Pipeline</li>
+								</ol>
+							</nav>
+
+							<div class="bog-content-area">
+								<h2 class="mt-5">Part 1: ETL Pipeline</h2>
+								<blockquote class="blockquote-left mt-5">
+									<h5>Where messy data becomes model-ready</h5>
+									<br />
+									Analysis can't begin without clean data. This pipeline transforms noisy
+									member data into a clean, structured foundation for predictive modeling.<br /><br />
+									<a href="https://github.com/JF-30000/churn_prediction/blob/main/01_etl.ipynb" target="_blank">View full notebook on GitLab <i class="fa fa-chevron-right"></i></a>
+								</blockquote>
+
+								
+								<h4 class="mt-5">Data at a Glance</h4>
+								<p class="mt-3">
+									A synthetic dataset was created to protect privacy and provide a realistic representation of real-world challenges. It captures behavioral and 
+									demographic data on <b>2,081 unique fitness studio members</b>, each tied to one of <b>9 distinct studio locations</b>. The data includes various attributes including referral sources, studio regions, and member engagement signals.
+								</p>
+								
+								<hr class="mt-5">
+								
+								<h4 class="mt-5 mb-3">What This Pipeline Delivers</h4>
+								<ul>
+									<li>Standardizes messy referral sources for accurate marketing attribution</li>
+									<li>Fixes unrealistic ages using demographic-based imputation</li>
+									<li>Formats binary and categorical fields for machine learning compatibility</li>
+									<li>Outputs a clean dataset for dashboards, models, and strategy decisions</li>
+								</ul>
+								
+
+								<p class="mt-2">
+									The next few sections walk through the Python code used to standardize this field and ensure clean, consistent inputs for downstream analysis.
+								</p>
+
+								<hr class="mt-5">
+								
+								<h4 class="mt-5">Key Fixes &amp; Validations</h4>
+								<h5 class="mt-5">Inconsistent Referral Data</h5>
+								<p class="mt-3">
+									<b>Solution</b>: Referral Source Cleanup
+								</p>
+								
+								<p class="mt-3">
+									One of the most inconsistent fields in the raw data was <code>referral_source</code>, likely due to human error. It was filled with typos, irregular formatting, and redundant variations of the same label. 
+								</p>
+
+								<p class="pt-1">
+									<b>Messy Raw Inputs (Python)</b>
+								</p>
+
+								<div class="code-container">
+									<pre><code>
+print(df_members['referral_source'].sort_values().unique())
+
+['Com. Event' 'Community Event' 'CommunityEvent' 'Empl Program'
+ 'Employer Prgrm' 'Employer Program' 'Frend' 'Friend' 'Online Ad'
+ 'OnlineAd' 'Onlne Ad' 'Other' 'Othr' 'Partner Ship' 'Partnership'
+ 'Partnrship' 'Soc. Media' 'Social Media' 'SocialMedia' 'WALK-IN'
+ 'Walk in' 'Walk-in' 'friend' 'frnd' 'onlinead' 'othr' 'soc media'
+ 'walkin']
+  </code></pre>
+								</div>
+
+								<p>
+									These values were standardized into clean, consolidated categories. The cleanup logic used simple mapping rules to group synonymous entries under unified labels:
+								</p>
+								
+								<p class="pt-3">
+									<b>Standardization Logic (Python)</b>
+								</p>
+								<div class="code-container">
+									<pre><code>
+referral_mapping = {
+    'walkin': 'Walk-in', 'Walk in': 'Walk-in', 'WALK-IN': 'Walk-in', 'Walk-in': 'Walk-in',
+    'friend': 'Friend', 'Friend': 'Friend', 'Frend': 'Friend', 'frnd': 'Friend',
+    'OnlineAd': 'Online Ad', 'onlinead': 'Online Ad', 'Onlne Ad': 'Online Ad',
+    'SocialMedia': 'Social Media', 'Soc. Media': 'Social Media', 'soc media': 'Social Media',
+    'Partnrship': 'Partnership', 'Partner Ship': 'Partnership',
+    'Employer Prgrm': 'Employer Program', 'Empl Program': 'Employer Program',
+    'Com. Event': 'Community Event', 'CommunityEvent': 'Community Event',
+    'othr': 'Other', 'Othr': 'Other'
+}
+
+df_members['referral_source'] = df_members['referral_source'].replace(referral_mapping)
+  </code></pre>
+								</div>
+
+								<p class="pt-1">
+									<b>After Cleanup (Python)</b>
+								</p>
+								<div class="code-container">
+									<pre><code>
+print(df_members['referral_source'].sort_values().unique())
+
+['Community Event' 'Employer Program' 'Friend' 'Online Ad' 'Other'
+ 'Partnership' 'Social Media' 'Walk-in']
+  </code></pre>
+								</div>
+								
+
+								<hr class="mt-5">
+
+								<h5 class="mt-5">Demographic Outliers</h5>
+								<p class="mt-3">
+									<b>Solution</b>: Addressing Unrealistic Age Values
+								</p>
+								<p class="mt-3">
+									Age values under 10 or over 100 were deemed data entry issues and replaced with
+									median age values by cohort.
+								</p>
+								<a class="image-popup" href="static/img/etl/age_cleanup.png">
+									<img src="static/img/etl/age_cleanup.png" alt="age cleanup" />
+								</a>
+
+								<h5 class="mt-4">Final Output</h5>
+								<p class="mt-2">
+									The pipeline produces <code>fitness_studio_clean.csv</code> for downstream machine
+									learning.
+								</p>
+
+								<hr class="mt-5">
+								
+								<h4 class="mt-5">Optional: Load Data to Snowflake Warehouse</h4>
+								<p class="mt-3">
+									Using the native <code>snowflake.connector</code> and <code>write_pandas()</code>,
+									cleaned data is available to be loaded into Snowflake through a single, persistent
+									connection. Credentials are securely managed via a hidden <code>.env</code> file to
+									protect sensitive information. This approach enables efficient bulk uploads, ensures
+									tables are created with predefined DDL, and maintains clean session management by
+									closing the connection after all writes.
+								</p>
+
+								<h5 class="mt-4">Credential Setup</h5>
+
+								<div class="code-container">
+									<pre><code>
+import snowflake.connector
+from snowflake.connector.pandas_tools import write_pandas
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+user = os.getenv("SNOWFLAKE_USER")
+password = os.getenv("SNOWFLAKE_PASSWORD")
+account = os.getenv("SNOWFLAKE_ACCOUNT")
+warehouse = os.getenv("SNOWFLAKE_WAREHOUSE")
+database = os.getenv("SNOWFLAKE_DATABASE")
+schema = os.getenv("SNOWFLAKE_SCHEMA")
+role = os.getenv("SNOWFLAKE_ROLE")
+  </code></pre>
+								</div>
+
+								<h5 class="mt-4">Build Connection Using <code>.env</code> Credentials</h5>
+								<div class="code-container">
+									<pre><code>
+conn = snowflake.connector.connect(
+    user = user,
+    password = password,
+    account = account,
+    warehouse = warehouse,
+    database = database,
+    schema = schema,
+    role = role
+)
+cur = conn.cursor()
+  </code></pre>
+								</div>
+
+								
+								<hr class="mt-5">
+								
+								
+								<h5 class="mt-5">Define table Data Definition Language (DDLs)</h5>
+								<p>
+									This step uses <code>CREATE OR REPLACE TABLE</code> statements to explicitly define the schema for each table (in this case <code>TBL_FITNESS_STUDIO_CHURN</code> derived from the <code>fitness_studio_clean.csv</code> export).
+								</p>
+								<p class="mt-3">
+									Predefining these structures ensures data integrity, consistent data types, and prepares the Snowflake environment for efficient, scalable bulk data ingestion. While the example shown handles one table, the approach supports multi-table loads across the entire fitness studio dataset.
+								</p>
+
+								<div class="code-container">
+									<pre><code>
+# define table DDLs
+ddl_statements = {
+    'TBL_FITNESS_STUDIO_CHURN': '''
+        CREATE OR REPLACE TABLE TBL_FITNESS_STUDIO_CHURN (
+            MEMBER_ID STRING PRIMARY KEY,
+            ENGAGEMENT_SCORE INT,
+            HOME_STUDIO_REGION STRING,
+            GENDER STRING,
+            AGE FLOAT,
+            MEMBERSHIP_TENURE_MONTHS INT,
+            AVG_WEEKLY_CLASSES_LAST_6_MONTHS FLOAT,
+            NUM_UNIQUE_CLASS_TYPES_ATTENDED INT,
+            AUTO_RENEW_ENABLED INT,
+            LAST_ATTENDED_30_DAYS_FLAG INT,
+            MONTHLY_MEMBERSHIP_COST INT,
+            REFERRAL_SOURCE STRING,
+            IS_CHURNED INT
+            STUDIO_NAME STRING,
+            STUDIO_ID STRING,
+            ADDRESS_FULL STRING
+        );
+    '''
+}
+  </code></pre>
+								</div>
+								
+								<hr class="mt-5">
+								
+								<h5 class="mt-5">Local Dataframe References</h5>
+								<div class="code-container">
+									<pre><code>
+# local dataframe references
+dataframes = {
+    'TBL_FITNESS_STUDIO_CHURN': df_members
+}
+  </code></pre>
+								</div>
+								
+								<hr class="mt-5">
+								
+								<h5 class="mt-5">Loop Through Each Table to Create and Load</h5>
+								<div class="code-container">
+									<pre><code>
+# loop through each table to create and load
+for table_name, ddl in ddl_statements.items():
+    try:
+        cur.execute(ddl)
+        print(f"Success: Table {table_name} created.")
+    except Exception as e:
+        print(f"*Error*: Failed to create {table_name}: {e}")
+    
+    try:
+        success, nchunks, nrows, _ = write_pandas(conn, dataframes[table_name], table_name)
+        print(f"Success: Loaded {nrows} rows into {table_name}")
+    except Exception as e:
+        print(f"*Error*: Failed to load data into {table_name}: {e}")
+  </code></pre>
+								</div>
+								
+
+								<hr class="mt-5">
+								
+								
+								<h4 class="mt-5">Ensuring Reliable Insights from the Start</h4>
+								<p class="mt-3">
+									Data rarely arrives clean, and the success of any analytics project hinges on the quality of its inputs. This pipeline tackles that challenge head-on, validating, cleaning, and structuring data at the source to ensure all downstream analytics, models, and strategic decisions are built on a foundation of trust.
+								</p>
+
+								
+								<hr class="mt-5">
+								
+								<!-- Navigation Buttons -->
+								<h4 class="mt-5"><b>Up Next</b>: Part 2 - Churn Exploratory Data Analysis (EDA)</h4>
+								<p>
+									With the data now cleaned, the project moves into exploration. The EDA phase reveals
+									early signs of churn such as low engagement, short membership tenures, and
+									inconsistent behavior.
+								</p>
+								<a href="churn-predicition.html" class="btn btn-dark btn-sm mt-3" role="button">
+									<i class="fa fa-chevron-left"></i> Project Home
+								</a>
+								<a
+									href="churn-predicition-p2-eda.html"
+									class="btn btn-custom btn-sm mt-3"
+									role="button">
+									Part 2: Churn EDA <i class="fa fa-chevron-right"></i>
+								</a>
+							</div>
+						</div>
+
+						<!-- Sidebar -->
+						<div class="col-12 col-md-12 col-lg-3 md-m-30px-b mt-5">
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">SECTIONS</h5>
+								<div class="widget-categories">
+									<ul class="list-style-1">
+										<li><a href="churn-predicition-p1-etl.html">Part 1 - ETL Pipeline</a></li>
+										<li><a href="churn-predicition-p2-eda.html">Part 2 - Churn EDA</a></li>
+										<li><a href="churn-predicition-p3-models.html">Part 3 - Prediction Modeling</a></li>
+										<li><a href="churn-predicition-p4-strategic-rec.html">Part 4 - Strategy</a></li>
+									</ul>
+								</div>
+							</div>
+							
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">GITHUB REPO</h5>
+								<div class="widget-categories">
+									<ul class="list-style-1">
+										<li><a href="https://github.com/JF-30000/churn_prediction" target="_blank"><i class="fab fa-github-alt"></i> Churn Prediction</a></li>
+										
+									</ul>
+								</div>
+							</div>
+							
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">TECH STACK</h5>
+								<div class="widget-popular-tag">
+									<ul class="list-style-tag">
+										<li><a href="#">Python</a></li>
+										<li><a href="#">Pandas</a></li>
+										<li><a href="#">Scikit-learn</a></li>
+										<li><a href="#">SQL</a></li>
+										<li><a href="#">Snowflake</a></li>
+										<li><a href="#">Plotly</a></li>
+										<li><a href="#">Jupyter</a></li>
+										<li><a href="#">GitHub</a></li>
+									</ul>
+								</div>
+							</div>
+							
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">FOCUS AREAS</h5>
+								<div class="widget-popular-tag">
+									<ul class="list-style-tag">
+										<li><a href="#">Churn Prediction</a></li>
+										<li><a href="#">ETL Pipelines</a></li>
+										<li><a href="#">Data Cleaning</a></li>
+										<li><a href="#">Feature Engineering</a></li>
+										<li><a href="#">Model Evaluation</a></li>
+										<li><a href="#">Cloud Data Integration</a></li>
+										<li><a href="#">KPI Development</a></li>
+										<li><a href="#">Business Strategy Alignment</a></li>
+									</ul>
+								</div>
+							</div>
+							
+
+						</div>
+						<!-- /.END Sidebar -->
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer -->
+	<footer class="footer footer-blog">
+		<div class="container">
+			<div class="footer-logo">
+				<span>Jim Fischer <span class="theme-bg"></span></span>
+			</div>
+			<ul class="social-icons">
+				<li><a href="https://github.com/JF-30000?tab=repositories" target="_blank"><i class="fab fa-github-alt"></i></a></li>
+				<li><a href="https://www.linkedin.com/in/jamesafischer" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+			</ul>
+		</div>
+	</footer>
+
+		<!-- Scripts -->
+		<script src="static/js/jquery-3.2.1.min.js"></script>
+		<script src="static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$(".image-popup").magnificPopup({
+					type: "image",
+					mainClass: "mfp-with-zoom",
+					zoom: { enabled: true, duration: 300, easing: "ease-in-out" },
+					image: { verticalFit: true }
+				});
+			});
+		</script>
+		<script src="static/plugin/bootstrap/js/popper.min.js"></script>
+		<script src="static/plugin/bootstrap/js/bootstrap.min.js"></script>
+		<script src="static/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+		<script src="static/plugin/isotope/isotope.pkgd.min.js"></script>
+		<script src="static/plugin/magnific/jquery.magnific-popup.min.js"></script>
+		<script src="static/js/custom.js"></script>
+	</body>
+</html>

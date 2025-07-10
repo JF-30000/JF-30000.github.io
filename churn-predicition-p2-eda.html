@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<!--
+	========================================================================
+	EXCLUSIVE ON themeforest.net
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Template Name   : Ryan
+	Author          : mital_04
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Copyright (c) 2018 - mital_04
+	========================================================================
+	-->
+		<!-- Page Title -->
+		<title>Jim Fischer</title>
+		<!-- / -->
+
+		<!---Font Icon-->
+		<link href="static/plugin/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+		<link href="static/plugin/themify-icons/themify-icons.css" rel="stylesheet" />
+		<!-- / -->
+
+		<!-- Plugin CSS -->
+		<link href="static/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="static/plugin/owl-carousel/css/owl.carousel.min.css" rel="stylesheet" />
+		<link href="static/plugin/magnific/magnific-popup.css" rel="stylesheet" />
+		<!-- / -->
+
+		<!-- Theme Style -->
+		<link href="static/css/styles.css" rel="stylesheet" />
+		<link href="static/css/color/color-1.css" rel="stylesheet" id="color_theme" />
+		<!-- / -->
+
+		<!-- Favicon -->
+		<link rel="icon" href="favicon.ico" />
+		<!-- / -->
+	</head>
+
+	<!-- Body Start -->
+
+	<body data-spy="scroll" data-target="#navbarRyan" data-offset="98">
+		<!-- LOADING -->
+		<div id="loading">
+			<div class="load-circle"><span class="one"></span></div>
+		</div>
+
+		<!-- HEADER -->
+		<header>
+			<nav class="navbar header-nav header-nav fixed-top navbar-expand-lg">
+				<div class="container">
+					<!-- BRAND -->
+					<a class="navbar-brand" href="index.html">Jim <span class="theme-bg"></span></a>
+
+					<!-- MOBILE TOGGLE -->
+					<button
+						class="navbar-toggler"
+						type="button"
+						data-toggle="collapse"
+						data-target="#navbarRyan"
+						aria-controls="navbarRyan"
+						aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+
+					<!-- TOP MENU -->
+					<div class="collapse navbar-collapse justify-content-end" id="navbarRyan">
+						<ul class="navbar-nav">
+							<li><a class="nav-link" href="index.html#home">Home</a></li>
+							<li><a class="nav-link" href="index.html#portfolio">Projects</a></li>
+							<li><a class="nav-link" href="index.html#aboutus">About</a></li>
+							<li><a class="nav-link" href="index.html#contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /.END CONTAINER -->
+			</nav>
+		</header>
+		<!-- /.END HEADER -->
+
+		<!-- MAIN -->
+		<main>
+			<!-- PAGE HEADER -->
+			<section class="page-title" style="background-image: url(static/img/)">
+				<div class="container"></div>
+			</section>
+
+			<section class="section blog-lising">
+				<div class="container">
+					<div class="row">
+						<!-- CONTENT AREA -->
+						<div class="col-12 col-md-12 col-lg-9 p-50px-r md-p-15px-r">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html#portfolio">Projects</a></li>
+									<li class="breadcrumb-item">
+										<a href="churn-predicition.html">Churn Prediction</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">Churn EDA</li>
+								</ol>
+							</nav>
+
+							<div class="bog-content-area">
+								<h2 class="mt-5">Part 2: Exploratory Data Analysis (EDA)</h2>
+
+								<blockquote class="blockquote-left mt-5">
+									<h5>Why do some members stay while others disappear?</h5>
+									<br />
+									This section highlights key behavioral patterns and member characteristics by analyzing tenure, engagement, and referral source, revealing early signs of churn risk.<br /><br />
+									<a href="#">View full notebook on GitLab <i class="fa fa-chevron-right"></i></a>
+								</blockquote>
+
+								<h3 class="mt-5">EDA Highlights</h3>
+
+								<h5 class="mt-3">Studio Locations</h5>
+
+								<p class="mt-3">
+									Studio addresses were geocoded to visualize coverage across metro Denver. This
+									spatial context helps operators pinpoint regional churn trends and explore
+									location-driven performance differences.
+								</p>
+
+								<a class="image-popup" href="static/img/eda/00_map.png">
+									<img
+										src="static/img/eda/00_map.png"
+										alt="Mapped Studio Locations" />
+								</a>
+
+								<hr class="mt-5">
+								
+								<!-- MEMBER VOLUME / CHURN RATES -->
+								<h5 class="mt-5">Studio Member Volume and Churn Rate</h5>
+								<p class="mt-3 mb-4">
+									Churn rates across locations range from 29% to 38%, underscoring the importance of location-specific retention strategies.
+								</p>
+								<a class="image-popup" href="static/img/eda/00_volume_churn.png">
+									<img src="static/img/eda/00_volume_churn.png" alt="volume churn" />
+								</a>
+								<p class="mt-4">
+									Studio Member Volume and Churn Rate Takeaways:
+								</p>
+								<ul class="mt-3">
+									<li><b>High-risk studios</b><br>Highlands Ranch (38.4%), Hilltop Village (37.9%), and Castle Rock (36.7%) show the highest churn, pointing to potential engagement or operational issues.</li>
+									<li><b>Top performer</b><br>Lowry leads with the lowest churn (29.2%), suggesting strong onboarding or retention practices.</li>
+									<li>Studios like <b>Uptown Denver</b> and <b>Applewood Village</b> (mid-30% churn) are stable but offer room for optimization.</li>
+								</ul>
+
+								<hr class="mt-5">
+
+								<!-- AGE HISTOGRAM----------------->							
+								<h5 class="mt-5">Age Distribution</h5>
+								<p class="mt-3">
+									Understanding member demographics across locations is crucial for tailored retention. Age often serves as a proxy for stability and preferences. Certain studios skew older (e.g., Broomfield), which may correlate with lower churn or different class preferences.
+								</p>
+								<a class="image-popup" href="static/img/eda/02_age_dist.png">
+									<img src="static/img/eda/02_age_dist.png" alt="age dist" />
+								</a>
+
+								<hr class="mt-5">
+								
+								<!-- GENDER HISTOGRAM ------------->
+								<h5 class="mt-5">Gender Mix</h5>
+								<p class="mt-3">
+									Every studio maintains a relatively balanced gender mix (roughly 30-40% Female, Male, and Non-binary representation each), reflecting an inclusive environment and presenting opportunities for personalized engagement.
+								</p>
+								<!--
+								<p class="mt-3">
+									<b>High Gender Diversity Across the Board</b>
+								</p>
+								<ul>
+									<li>Every studio maintains a relatively balanced gender mix, with Female, Male, and Non-binary representation each making up roughly 30–40% of their respective populations.</li>
+									<li>This level of balance reflects an inclusive environment and presents an opportunity for personalized engagement strategies across all segments.</li>
+									<li>Highlands Ranch (36.2%), Broomfield (35.0%), and Cherry Knolls (32.4%) stand out for having one-third or more of their members identifying as Non-binary.</li>
+								</ul>
+								-->
+								<p class="mt-3">
+									<b>Female-Leaning Studios</b>
+								</p>
+								<ul>
+									<li>Applewood Village (42.5%) and Hilltop Village (38.6%) have the highest share of Female members, potentially signaling a brand position that resonates with this demographic.</li>
+								</ul>
+								<p class="mt-3">
+									<b>Male-Leaning Studios</b>
+								</p>
+								<ul>
+									<li>Castle Rock (36.7%) and Lowry (36.6%) have slightly higher Male representation suggesting differences in class demand or referral patterns, which can inform staffing and marketing efforts.</li>
+								</ul>
+								<a class="image-popup" href="static/img/eda/02_gender_dist.png">
+									<img src="static/img/eda/02_gender_dist.png" alt="Gender Distribution" />
+								</a>
+
+								<hr class="mt-5">
+								
+								<!-- HEATMAP ---------------------->
+								<h5 class="mt-5">What do loyal members have in common?</h5>
+								<p class="pt-3">
+									This chart reveals the relationships between member behaviors and traits. Darker colors indicate stronger correlations (blue for positive, red for negative). <b>One unexpected finding</b>: auto-renew settings had almost no impact on churn.
+									Despite common assumptions, members who manually renew aren’t any more likely to
+									leave.
+								</p>
+								<ul class="mt-4">
+									<li>
+										Members with higher engagement scores are significantly less likely to churn. No
+										surprise here given consistency builds commitment.
+									</li>
+									<li>
+										Longer-standing members show more loyalty. This supports the value of
+										cohort-based onboarding and long-term retention strategies.
+									</li>
+									<li>
+										Pricing alone doesn't drive churn in this dataset, pointing to experience and
+										engagement as more important levers.
+									</li>
+								</ul>
+								<a class="image-popup" href="static/img/eda/02_heatmap.png">
+									<img src="static/img/eda/02_heatmap.png" alt="Correlation Heatmap" />
+								</a>
+
+								<hr class="mt-5">
+								
+								<h4 class="mt-5">So What? Turning Exploration into Action</h4>
+								<p class="pt-2">
+									Each insight from this analysis directly points to specific strategies studio leadership can use to improve member retention:
+								</p>
+								<ul class="mt-4">
+									<li class="pb-3">
+										<b>Engagement is Key to Loyalty</b><br>
+										Members who consistently attend classes and try various class types are far less likely to churn. This means focusing on ways to keep members active and engaged is crucial for long-term loyalty.
+									</li>
+									<li class="pb-3">
+										<b>The Six-Month Mark is Critical</b><br>
+										The analysis shows that the risk of a member leaving drops significantly once they pass their six-month anniversary. This highlights the importance of strong onboarding and targeted retention efforts during those crucial first few months.
+									</li>
+									<li>
+										<b>Demographics Matter by Location</b><br>
+										Studios with younger, more transient member populations might need different approaches than those with older, more stable demographics. This could mean tailoring pricing, communication styles, or even class offerings to fit the unique preferences of each studio's member base.
+									</li>
+								</ul>
+
+								<hr class="mt-5">
+								
+								<!-- UP NEXT -->
+								<h4 class="mt-5"><b>Up Next</b>: Part 3 - Churn Models</h4>
+								<p class="pt-3">
+									The exploratory groundwork is complete. Part 3 shifts to predictive modeling to
+									quantify churn risk and identify which member traits have the greatest impact. The
+									focus moves from <i>who</i> is churning to understanding <i>why</i>.
+								</p>
+
+								<a
+									href="churn-predicition-p1-etl.html"
+									class="btn btn-dark btn-sm mt-3"
+									role="button"
+									aria-pressed="true">
+									<i class="fa fa-chevron-left"></i>
+									Part 1: ETL Pipeline
+								</a>
+								<a
+									href="churn-predicition-p3-models.html"
+									class="btn btn-custom btn-sm mt-3"
+									role="button"
+									aria-pressed="true">
+									Part 3: Churn Prediction Modeling
+									<i class="fa fa-chevron-right"></i>
+								</a>
+								<!-- /.END UP NEXT -->
+							</div>
+							<!-- content area -->
+						</div>
+						<!-- /.END CONTENT AREA -->
+
+						<!-- SIDE BAR -->
+						<div class="col-12 col-md-12 col-lg-3 md-m-30px-b mt-5">
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">SECTIONS</h5>
+								<div class="widget-categories">
+									<ul class="list-style-1">
+										<li><a href="churn-predicition-p1-etl.html">Part 1 - ETL Pipeline</a></li>
+										<li><a href="churn-predicition-p2-eda.html">Part 2 - Churn EDA</a></li>
+										<li><a href="churn-predicition-p3-models.html">Part 3 - Prediction Modeling</a></li>
+										<li><a href="churn-predicition-p4-strategic-rec.html">Part 4 - Strategy</a></li>
+									</ul>
+								</div>
+							</div>
+							
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">GITHUB REPO</h5>
+								<div class="widget-categories">
+									<ul class="list-style-1">
+										<li><a href="https://github.com/JF-30000/churn_prediction" target="_blank"><i class="fab fa-github-alt"></i> Churn Prediction</a></li>
+										
+									</ul>
+								</div>
+							</div>
+
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">TECH STACK</h5>
+								<div class="widget-popular-tag">
+									<ul class="list-style-tag">
+										<li><a href="#">Python</a></li>
+										<li><a href="#">Pandas</a></li>
+										<li><a href="#">Scikit-learn</a></li>
+										<li><a href="#">SQL</a></li>
+										<li><a href="#">Snowflake</a></li>
+										<li><a href="#">Plotly</a></li>
+										<li><a href="#">Jupyter</a></li>
+										<li><a href="#">GitHub</a></li>
+									</ul>
+								</div>
+							</div>
+							
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">FOCUS AREAS</h5>
+								<div class="widget-popular-tag">
+									<ul class="list-style-tag">
+										<li><a href="#">Churn Prediction</a></li>
+										<li><a href="#">ETL Pipelines</a></li>
+										<li><a href="#">Data Cleaning</a></li>
+										<li><a href="#">Feature Engineering</a></li>
+										<li><a href="#">Model Evaluation</a></li>
+										<li><a href="#">Cloud Data Integration</a></li>
+										<li><a href="#">KPI Development</a></li>
+										<li><a href="#">Business Strategy Alignment</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- /.END SIDE BAR -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</section>
+		</main>
+		<!-- /.END MAIN -->
+
+		<!-- FOOTER -->
+	<footer class="footer footer-blog">
+		<div class="container">
+			<div class="footer-logo">
+				<span>Jim Fischer <span class="theme-bg"></span></span>
+			</div>
+			<ul class="social-icons">
+				<li><a href="https://github.com/JF-30000?tab=repositories" target="_blank"><i class="fab fa-github-alt"></i></a></li>
+				<li><a href="https://www.linkedin.com/in/jamesafischer" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+			</ul>
+		</div>
+	</footer>
+
+		<!-- jQuery -->
+		<script src="static/js/jquery-3.2.1.min.js"></script>
+		<script src="static/js/jquery-migrate-3.0.0.min.js"></script>
+
+		<script>
+			$(document).ready(function () {
+				$(".image-popup").magnificPopup({
+					type: "image",
+					mainClass: "mfp-with-zoom", // this class is for CSS animation
+					zoom: {
+						enabled: true,
+						duration: 300, // duration of the zoom effect
+						easing: "ease-in-out" // CSS transition easing function
+					},
+					image: {
+						verticalFit: true
+					}
+				});
+			});
+		</script>
+
+		<!-- Plugins -->
+		<script src="static/plugin/bootstrap/js/popper.min.js"></script>
+		<script src="static/plugin/bootstrap/js/bootstrap.min.js"></script>
+		<script src="static/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+		<script src="static/plugin/isotope/isotope.pkgd.min.js"></script>
+		<script src="static/plugin/magnific/jquery.magnific-popup.min.js"></script>
+		<!-- custom -->
+		<script src="static/js/custom.js"></script>
+	</body>
+	<!-- Body End -->
+</html>
