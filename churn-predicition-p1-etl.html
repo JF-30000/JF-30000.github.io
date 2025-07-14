@@ -75,14 +75,13 @@
 									<br />
 									Analysis can't begin without clean data. This pipeline transforms noisy
 									member data into a clean, structured foundation for predictive modeling.<br /><br />
-									<a href="https://github.com/JF-30000/churn_prediction/blob/main/01_etl.ipynb" target="_blank">View full notebook on GitLab <i class="fa fa-chevron-right"></i></a>
+									<a href="https://github.com/JF-30000/churn_prediction/blob/main/01_etl.ipynb" target="_blank">View full notebook on GitHub <i class="fa fa-chevron-right"></i></a>
 								</blockquote>
 
 								
 								<h4 class="mt-5">Data at a Glance</h4>
 								<p class="mt-3">
-									A synthetic dataset was created to protect privacy and provide a realistic representation of real-world challenges. It captures behavioral and 
-									demographic data on <b>2,081 unique fitness studio members</b>, each tied to one of <b>9 distinct studio locations</b>. The data includes various attributes including referral sources, studio regions, and member engagement signals.
+									A synthetic dataset was created to protect privacy and provide a realistic representation of real-world challenges. It captures behavioral and demographic data on <b>2,081 unique fitness studio members</b> across <b>9 distinct studio locations</b>, including referral sources, studio regions, and member engagement signals.
 								</p>
 								
 								<hr class="mt-5">
@@ -94,15 +93,13 @@
 									<li>Formats binary and categorical fields for machine learning compatibility</li>
 									<li>Outputs a clean dataset for dashboards, models, and strategy decisions</li>
 								</ul>
-								
-
-								<p class="mt-2">
-									The next few sections walk through the Python code used to standardize this field and ensure clean, consistent inputs for downstream analysis.
-								</p>
 
 								<hr class="mt-5">
 								
 								<h4 class="mt-5">Key Fixes &amp; Validations</h4>
+								<p class="mt-3">
+									The following sections detail the Python code used to standardize and ensure clean, consistent inputs.
+								</p>
 								<h5 class="mt-5">Inconsistent Referral Data</h5>
 								<p class="mt-3">
 									<b>Solution</b>: Referral Source Cleanup
