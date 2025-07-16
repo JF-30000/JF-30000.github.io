@@ -127,7 +127,7 @@ print(df_members['referral_source'].sort_values().unique())
 								</div>
 
 								<p>
-									These values were standardized into clean, consolidated categories. The cleanup logic used simple mapping rules to group synonymous entries under unified labels:
+									These values were standardized into clean, consolidated categories.
 								</p>
 								
 								<p class="pt-3">
@@ -187,12 +187,9 @@ print(df_members['referral_source'].sort_values().unique())
 								
 								<h4 class="mt-5">Optional: Load Data to Snowflake Warehouse</h4>
 								<p class="mt-3">
-									Using the native <code>snowflake.connector</code> and <code>write_pandas()</code>,
-									cleaned data is available to be loaded into Snowflake through a single, persistent
-									connection. Credentials are securely managed via a hidden <code>.env</code> file to
-									protect sensitive information. This approach enables efficient bulk uploads, ensures
-									tables are created with predefined DDL, and maintains clean session management by
-									closing the connection after all writes.
+									Using the native <code>snowflake.connector</code> and <code>write_pandas()</code>, cleaned data is available to be loaded into
+									Snowflake through a single, persistent connection. Credentials are securely managed via a hidden <code>.env</code> file
+									to protect sensitive information, enabling efficient bulk uploads and proper session management.
 								</p>
 
 								<h5 class="mt-4">Credential Setup</h5>

@@ -130,8 +130,8 @@
 								</a>
 
 								
-								<!-- MEMBER VOLUME / CHURN RATES -->
-								<h5 class="mt-4">Studio Member Volume and Churn Rate Takeaways:</h5>
+								<!-- Studio Member Volume and Churn Rate Takeaways -->
+								<h5 class="mt-5">Studio Member Volume and Churn Rate Takeaways</h5>
 								<ul class="mt-3">
 									<li class="mb-2"><b>High-risk studios</b>: Highlands Ranch (38.4%), Hilltop Village (37.9%), and Castle Rock (36.7%) show the highest churn, pointing to potential engagement or operational issues.</li>
 									<li class="mb-2"><b>Top performer</b>: Lowry leads with the lowest churn (29.2%), suggesting strong onboarding or retention practices.</li>
@@ -144,44 +144,27 @@
 
 								<hr class="mt-5">
 
-								<!-- AGE HISTOGRAM----------------->							
-								<h5 class="mt-5">Age Distribution</h5>
+
+								<!-- Demographic Insights by Location -->
+								<h5 class="mt-5">Demographic Insights by Location</h5>
 								<p class="mt-3">
-									Understanding member demographics across locations is crucial for tailored retention. Age often serves as a proxy for stability and preferences. Certain studios skew older (e.g., Broomfield), which may correlate with lower churn or different class preferences.
+									Understanding member demographics across locations is crucial for tailored retention.
 								</p>
+								<ul class="mt-3">
+									<li class="mb-3"><b>Age Distribution</b>: Age often serves as a proxy for stability and preferences. Certain studios skew older (e.g., Broomfield), which may correlate with lower churn or different class preferences.</li>
+									<li class="mb-3"><b>Gender Mix</b>: Every studio maintains a relatively balanced gender mix (roughly 30-40% Female, Male, and Non-binary representation each), reflecting an inclusive environment and presenting opportunities for personalized engagement.</li>
+									<ul>
+										<li class="mb-3"><b>Female-Leaning Studios</b>: Applewood Village (42.5%) and Hilltop Village (38.6%) have the highest share of Female members, potentially signaling a brand position that resonates with this demographic.</li>
+										<li class="mb-4"><b>Male-Leaning Studios</b>: Castle Rock (36.7%) and Lowry (36.6%) have slightly higher Male representation, suggesting differences in class demand or referral patterns, which can inform staffing and marketing efforts.</li>
+									</ul>
+								</ul>
+
 								<a class="image-popup" href="static/img/eda/02_age_dist.png">
 									<img src="static/img/eda/02_age_dist.png" alt="age dist" />
 								</a>
-
-								<hr class="mt-5">
 								
-								<!-- GENDER HISTOGRAM ------------->
-								<h5 class="mt-5">Gender Mix</h5>
-								<p class="mt-3">
-									Every studio maintains a relatively balanced gender mix (roughly 30-40% Female, Male, and Non-binary representation each), reflecting an inclusive environment and presenting opportunities for personalized engagement.
-								</p>
-								<!--
-								<p class="mt-3">
-									<b>High Gender Diversity Across the Board</b>
-								</p>
-								<ul>
-									<li>Every studio maintains a relatively balanced gender mix, with Female, Male, and Non-binary representation each making up roughly 30–40% of their respective populations.</li>
-									<li>This level of balance reflects an inclusive environment and presents an opportunity for personalized engagement strategies across all segments.</li>
-									<li>Highlands Ranch (36.2%), Broomfield (35.0%), and Cherry Knolls (32.4%) stand out for having one-third or more of their members identifying as Non-binary.</li>
-								</ul>
-								-->
-								<p class="mt-3">
-									<b>Female-Leaning Studios</b>
-								</p>
-								<ul>
-									<li>Applewood Village (42.5%) and Hilltop Village (38.6%) have the highest share of Female members, potentially signaling a brand position that resonates with this demographic.</li>
-								</ul>
-								<p class="mt-3">
-									<b>Male-Leaning Studios</b>
-								</p>
-								<ul>
-									<li>Castle Rock (36.7%) and Lowry (36.6%) have slightly higher Male representation suggesting differences in class demand or referral patterns, which can inform staffing and marketing efforts.</li>
-								</ul>
+								<br><br><br>
+
 								<a class="image-popup" href="static/img/eda/02_gender_dist.png">
 									<img src="static/img/eda/02_gender_dist.png" alt="Gender Distribution" />
 								</a>
@@ -191,22 +174,17 @@
 								<!-- HEATMAP ---------------------->
 								<h5 class="mt-5">What do loyal members have in common?</h5>
 								<p class="pt-3">
-									This chart reveals the relationships between member behaviors and traits. Darker colors indicate stronger correlations (blue for positive, red for negative). <b>One unexpected finding</b>: auto-renew settings had almost no impact on churn.
-									Despite common assumptions, members who manually renew aren’t any more likely to
-									leave.
+									This chart reveals the relationships between member behaviors and traits. Darker colors indicate stronger correlations (blue for positive, red for negative).
 								</p>
 								<ul class="mt-4">
-									<li>
-										Members with higher engagement scores are significantly less likely to churn. No
-										surprise here given consistency builds commitment.
+									<li class="mb-3">
+										<b>Unexpected Finding</b>: Auto-renew settings had almost no impact on churn. Despite common assumptions, members who manually renew aren't any more likely to leave.
 									</li>
-									<li>
-										Longer-standing members show more loyalty. This supports the value of
-										cohort-based onboarding and long-term retention strategies.
+									<li class="mb-3">
+										<b>Engagement is Key</b>: Members with higher engagement scores are significantly less likely to churn, reinforcing that consistency builds commitment.
 									</li>
-									<li>
-										Pricing alone doesn't drive churn in this dataset, pointing to experience and
-										engagement as more important levers.
+									<li class="mb-3">
+										<b>Tenure Matters</b>: Longer-standing members show more loyalty, supporting the value of cohort-based onboarding and long-term retention strategies.
 									</li>
 								</ul>
 								<a class="image-popup" href="static/img/eda/02_heatmap.png">
@@ -221,16 +199,13 @@
 								</p>
 								<ul class="mt-4">
 									<li class="pb-3">
-										<b>Engagement is Key to Loyalty</b><br>
-										Members who consistently attend classes and try various class types are far less likely to churn. This means focusing on ways to keep members active and engaged is crucial for long-term loyalty.
+										<b>Engagement is Key to Loyalty</b>: Consistent attendance and diverse class participation are strong loyalty signals. Focus on keeping members active and engaged is crucial for long-term loyalty.
 									</li>
 									<li class="pb-3">
-										<b>The Six-Month Mark is Critical</b><br>
-										The analysis shows that the risk of a member leaving drops significantly once they pass their six-month anniversary. This highlights the importance of strong onboarding and targeted retention efforts during those crucial first few months.
+										<b>The Six-Month Mark is Critical</b>: Churn risk drops significantly once members pass their six-month anniversary. This highlights the importance of strong onboarding and targeted retention efforts during those crucial first few months.
 									</li>
 									<li>
-										<b>Demographics Matter by Location</b><br>
-										Studios with younger, more transient member populations might need different approaches than those with older, more stable demographics. This could mean tailoring pricing, communication styles, or even class offerings to fit the unique preferences of each studio's member base.
+										<b>Demographics Matter by Location</b>: Studios with younger, more transient member populations might need different approaches than those with older, more stable demographics. Tailor pricing, communication, or class offerings to fit each studio's unique member base.
 									</li>
 								</ul>
 
@@ -239,9 +214,7 @@
 								<!-- UP NEXT -->
 								<h4 class="mt-5"><b>Up Next</b>: Part 3 - Churn Models</h4>
 								<p class="pt-3">
-									The exploratory groundwork is complete. Part 3 shifts to predictive modeling to
-									quantify churn risk and identify which member traits have the greatest impact. The
-									focus moves from <i>who</i> is churning to understanding <i>why</i>.
+									The exploratory groundwork is complete. Part 3 shifts to predictive modeling to quantify churn risk and identify which member traits have the greatest impact. The focus moves from <i>who</i> is churning to understanding <i>why</i>.
 								</p>
 
 								<a
