@@ -1399,6 +1399,24 @@ img {
     display: inline-block; /* Ensures ::after works consistently */
 }
 
+/* Plus sign for BI Users */
+#bi-users-counter::after {
+    content: '+'; /* Adds plus sign */
+    font-size: 1em; /* Match the number size */
+}
+
+/* Plus sign for Initiatives Led */
+#initiatives-led-counter::after {
+    content: '+';
+    font-size: 1em;
+}
+
+/* Optional: ensure consistent display behavior */
+#bi-users-counter,
+#initiatives-led-counter {
+    display: inline-block;
+}
+
 /*-----------------------------------------
 * 11. Portfolio
 -----------------------------------------*/
@@ -1974,7 +1992,19 @@ blockquote.blockquote-left {
 	font-size: 15px;
 	/* margin: 30px 0 50px; */
 	margin: 15px 0 15px;
+}
+
+blockquote.blockquote-left-light {
+	/*background: #D3D9D4;*/
+	/*background: rgba(211, 217, 212, 0.25);*/
 	
+	padding: 20px;
+	border-left: 5px solid gray;
+	font-size: 15px;
+	/* margin: 30px 0 50px; */
+	margin: 15px 0 15px;
+	margin-left: 50px;
+	font-style: italic;
 }
 
 blockquote.blockquote-left .parson {
@@ -2197,7 +2227,7 @@ blockquote.blockquote-left .parson {
 }
 
 .contact-us-box {
-	margin: 0 5%;
+	/*margin: 0 5%;*/
 	position: relative;
 	background: #fff;
 	box-shadow: 0px 1px 27px -3px rgba(0, 0, 0, 0.2);
