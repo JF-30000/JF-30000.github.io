@@ -1399,6 +1399,12 @@ img {
     display: inline-block; /* Ensures ::after works consistently */
 }
 
+/* Years counter */
+#bi-years-counter::after {
+    content: '+'; /* Adds plus sign */
+    font-size: 1em; /* Match the number size */
+}
+
 /* Plus sign for BI Users */
 #bi-users-counter::after {
     content: '+'; /* Adds plus sign */
