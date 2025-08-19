@@ -84,6 +84,59 @@ Table of contents
 
 
 
+.nav-tabs .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  background-color: transparent;
+  padding: .5rem 1rem;
+}
+
+.nav-tabs .nav-link:hover {
+  border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+.nav-tabs .nav-link.active {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+}
+
+
+/* Override Bootstrap card header background */
+.accordion .card-header {
+	background-color: #D3D9D4 !important;
+	padding-top: 0.4rem;
+	padding-bottom: 0.4rem;
+}
+
+  /* Adjust accordion button styling */
+.accordion .btn-link {
+	color: #000; /* keep text black */
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.accordion .btn-link:hover {
+	text-decoration: none;
+	color: #2E3944;
+}
+
+/* Reduce spacing between cards */
+.accordion .card {
+	margin-bottom: 0.5rem;
+}
+
+  /* Tighten up list spacing inside */
+  .accordion .card-body ul li {
+  	margin-bottom: 0.25rem;
+  }
+
+
 
 /* Scrollable container */
 .code-container {
@@ -124,7 +177,34 @@ pre code {
 
 
 
+/* Scope everything to the second tab group only */
+.db-tabs-2.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+}
 
+.db-tabs-2 .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  background-color: transparent;
+  padding: .5rem 1rem;
+}
+
+.db-tabs-2 .nav-link:hover {
+  border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+.db-tabs-2 .nav-link.active {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+/* Optional: keep dropdown menu from stretching full width in some nav layouts */
+.db-tabs-2 .dropdown-menu {
+  min-width: 10rem;
+}
+ 
 
 
 

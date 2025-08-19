@@ -116,20 +116,13 @@
 							<h1 class="mt-5">Dynamic ETL Pipeline for Time-Series Data Across Multiple Databases</h1>
 							<h4 class="mt-5">Manual. Brittle. Repetitive.</h4>
 							<p class="mt-4">
-								That’s the reality in many enterprise reporting environments, especially when
-								time-partitioned data lives
-								across dozens of identically structured databases (monthly archives, regional splits,
-								regulatory snapshots).
-								Too often, analysts and engineers burn time rewriting the same query over and over
-								instead of delivering
-								insights.
+								That’s the reality in many enterprise reporting environments when time-partitioned data lives across dozens
+								of identically structured databases (monthly archives, regional splits, regulatory snapshots). Too often,
+								analysts spend their energy rewriting queries instead of generating insights.
 							</p>
 							<p class="mt-4">
-								I built this project to eliminate that friction and showcase how leadership in analytics
-								is about more than
-								just code. It is about designing systems that scale, removing operational waste, and
-								empowering teams to
-								focus on decision-making, not data wrangling.
+								I designed this project to remove that friction and to demonstrate how effective analytics leadership can build systems that scale, eliminating operational waste, and enabling
+								teams to focus on decision-making rather than data wrangling.
 							</p>
 							<p class="mt-4">
 								This Python-based ETL pipeline:
@@ -150,35 +143,6 @@
 								</li>
 							</ul>
 
-
-							<h4 class="mt-5">Why This Matters</h4>
-							<p class="mt-4">
-								Siloed data doesn't just slow reporting. It delays business decisions, increases
-								compliance risk, and frustrates teams. This project demonstrates how to design data
-								workflows that remain flexible and adaptable when change is certain, protecting against
-								schema sprawl and fragmented reporting environments.
-							</p>
-							<p class="mt-4">
-								<b>Applicable To</b>:
-							</p>
-							<ul class="mt-3">
-								<li class="pb-2">
-									BI teams consolidating regional or monthly reporting
-								</li>
-								<li class="pb-2">
-									Fintechs managing ledger snapshots or regulatory extracts
-								</li>
-								<li>
-									Any business tired of “copy-paste query fatigue”
-								</li>
-							</ul>
-
-							<p class="mt-4">
-								While the code runs in Python, the real impact is in the architecture. Parameterized
-								logic, dynamic discovery, and monitoring utilities make the process resilient,
-								transparent, and scalable to hundreds of sources.
-							</p>
-
 							<blockquote class="blockquote-left mt-5">
 								<div class="row">
 									<div class="col-md-12">
@@ -187,85 +151,62 @@
 								</div>
 								<div class="row">
 									<div class="col-md-6">
-										<a href="#part1">Part 1: DB &amp; Table Discovery</a><br>
-										Finds all qualifying databases and matching tables using naming
-										patterns.<br><br>
-										<a href="#part2">Part 2: Dynamic SQL Generation</a><br>
-										Builds a single reusable SQL query across all sources.<br><br>
+										<a href="#part1">Part 1: DB &amp; Table Discovery</a><br />
+										Automatically identifies qualifying databases and tables based on naming patterns, removing fragile hardcoding.<br /><br />
+										<a href="#part2">Part 2: Dynamic SQL Generation</a><br />
+										Builds a single reusable SQL query across all sources.<br /><br />
 									</div>
 									<div class="col-md-6">
-										<a href="#part3">Part 3: Data Extraction &amp; Monitoring</a><br>
-										Pulls results into a DataFrame with real-time execution monitoring.<br><br>
-										<a href="#part4">Part 4: Batch Insert &amp; Load Validation</a><br>
-										Inserts into target DB in batches with progress tracking and error recovery.
+										<a href="#part3">Part 3: Data Extraction &amp; Monitoring</a><br />
+										Streams results into a DataFrame with real-time progress tracking to make long jobs transparent and auditable.<br /><br />
+										<a href="#part4">Part 4: Batch Insert &amp; Load Validation</a><br />
+										Loads data into the target database in batches with built-in error handling, validation, and recovery safeguards.
 									</div>
 								</div>
 							</blockquote>
 
+							<h4 class="mt-5">Why This Matters</h4>
+							<p class="mt-4">
+								This project shows how to design scalable, flexible workflows that adapt as business needs change, protecting against schema sprawl and fragmented reporting environments.
+							</p>
+							<p class="mt-4"><b>Who Benefits</b>:</p>
+							<ul class="mt-3">
+								<li class="pb-2">BI teams consolidating regional or monthly reporting</li>
+								<li class="pb-2">Fintechs managing ledger snapshots or regulatory extracts</li>
+								<li>Any business tired of “copy-paste query fatigue”</li>
+							</ul>
+
+							<p class="mt-4">
+								Python is just the wrapper; the real value is in the design. It’s built to adapt, keep track of itself, and
+								scale without turning into a maintenance headache.
+							</p>
+
+
 
 							<!-- PART 1: DB AND TABLE DISCOVERY ----------------->
-							<h4 class="mt-5" id="part1">Part 1: DB &amp; Table Discovery</h4>
+							<h3 class="mt-5" id="part1">Part 1: DB &amp; Table Discovery</h3>
 							<p class="mt-4">
-								Instead of relying on hardcoded names, this step uses naming patterns and safe parsing
-								logic to identify exactly which databases and tables to pull from. This is a
-								foundational step that prevents failures down the line.
+								Instead of relying on hardcoded names, this step uses naming patterns and safe parsing logic to identify
+								exactly which databases and tables to pull from. This is a foundational step that prevents failures down the
+								line.
 							</p>
 							<p class="mt-4">
-								By raising an exception when no databases match the criteria, the pipeline fails fast,
-								saving hours of troubleshooting later.
+								By raising an exception when no databases match the criteria, the pipeline fails fast, saving hours of
+								troubleshooting later.
 							</p>
 
 							<div class="code-container">
-								<pre><code>min_year = 2015
-db_prefix = 'archive_20'
-
-query_dbs = f"""
+								<pre><code># example snippet (shortened for readability)
+query_dbs = """
     SELECT name FROM sys.databases
-    WHERE name LIKE '{db_prefix}%'
-      AND TRY_CAST(REPLACE(name, '{db_prefix}', '') AS INT) &gt; {min_year}
+    WHERE name LIKE 'archive_20%' 
+      AND TRY_CAST(REPLACE(name, 'archive_20', '') AS INT) &gt; 2015
 """
-
 dbs = pd.read_sql(query_dbs, engine_src)['name'].tolist()
-
-if not dbs:
-    raise ValueError(f"No databases found with prefix '{db_prefix}' after {min_year}.")
 </code></pre>
 							</div>
 
-
-
-
-							<!-- <p class="pt-4">
-								<b>Discover Tables in Each Database</b>
-							</p> -->
-							<p class="pt-0">
-								Once databases are identified, the pipeline inspects each to find tables that match a
-								known pattern. This creates a fully qualified list of tables that will feed the dynamic
-								SQL in the next step, ensuring no guesswork or manual maintenance.
-							</p>
-							<div class="code-container">
-								<pre><code>table_name_pattern = 'archive_data_%'
-table_refs = []
-
-for db in dbs:
-    query_tables = f"""
-        SELECT '{db}' AS dbname, TABLE_NAME
-        FROM [{db}].INFORMATION_SCHEMA.TABLES
-        WHERE TABLE_NAME LIKE '{table_name_pattern}'
-    """
-    tables = pd.read_sql(query_tables, engine_src)
-
-    if tables.empty:
-        print(f"No matching tables found in {db}")
-        continue
-
-    for _, row in tables.iterrows():
-        table_refs.append(f"[{db}].[dbo].[{row['TABLE_NAME']}]")
-</code></pre>
-							</div>
-
-
-							<p class="pt-4">
+							<p>
 								This approach allows the ETL process to instantly adapt when new partitions are added or
 								old ones are retired, without rewriting any SQL.
 							</p>
@@ -273,11 +214,14 @@ for db in dbs:
 
 							<hr class="mt-5">
 
+							
+							<!-- --------------------------------------------- -->
 							<!-- PART 2: DYNAMIC SQL GENERATION ----------------->
-							<h4 class="mt-5" id="part2">Part 2: Dynamic SQL Generation</h4>
+							<!-- --------------------------------------------- -->
+							
+							<h3 class="mt-5" id="part2">Part 2: Dynamic SQL Generation</h3>
 							<p class="mt-4">
-								The next challenge is pulling from every matching table without manually writing a
-								separate <code>SELECT</code> for each.
+								Manually writing one query per table is brittle and a time sink. This pipeline instead generates a single reusable query that adapts automatically to the set of matching tables.
 							</p>
 
 							<p class="mt-4">
@@ -286,12 +230,20 @@ for db in dbs:
 							</p>
 
 							<div class="code-container">
-								<pre><code>columns = 'column1, column2, column3'
-where_clause = 'WHERE your_date_column &gt;= DATEADD(MONTH, -6, GETDATE())'
+								<pre><code># define columns and filters once
+columns = 'CustomerID, TransactionDate, Amount'
+where_clause = "WHERE TransactionDate &gt;= DATEADD(MONTH, -6, GETDATE())"
 
-union_queries = [f"SELECT {columns} FROM {tbl} {where_clause}" for tbl in table_refs]
-final_query = ' UNION ALL\n'.join(union_queries)
+# build a SELECT for each table
+union_queries = [
+    f"SELECT {columns} FROM {tbl} {where_clause}"
+    for tbl in table_refs
+]
 
+# combine into one UNION ALL
+final_query = " UNION ALL\n".join(union_queries)
+
+# wrap in a CTE for easy downstream use
 full_query = f"""
     WITH CombinedData AS (
         {final_query}
@@ -302,23 +254,38 @@ full_query = f"""
 							</div>
 
 							<p class="mt-4">
-								This is the difference between building a script and designing a framework. The moment a
-								new table appears in the source environment, this pipeline adapts without developer
-								intervention.
+								This approach eliminates duplication, creates flexibility for different use cases, and shows how to design with scale in mind. Analysts can pivot business rules by changing parameters once, instead of re-authoring dozens of queries.
 							</p>
 
 							<hr class="mt-5">
 
 							<!-- PART 3: DATA EXTRACTION AND MONITORING --------->
-							<h4 class="mt-5" id="part3">Part 3: Data Extraction &amp; Monitoring</h4>
+							<h3 class="mt-5" id="part3">Part 3: Data Extraction &amp; Monitoring</h3>
 							<p class="mt-4">
-								Long-running queries can be black boxes. This pipeline includes lightweight,
-								non-blocking stopwatch utilities to give real-time visibility. A small touch like this
-								can dramatically improve developer and stakeholder confidence.
+								Long-running ETL jobs can feel like black boxes. Without visibility, developers and analysts are left
+								wondering: <em>Is it working? Is it stuck? Should I intervene?</em>
+							</p>
+							<p class="mt-4">
+								This pipeline adds lightweight stopwatch utilities to show elapsed time and progress live. It’s a small touch
+								that dramatically improves trust, makes jobs predictable, and reduces interruptions during critical runs.
 							</p>
 
 							<div class="code-container">
-								<pre><code>try:
+								<pre><code># stopwatch utility runs in a background thread
+def simple_stopwatch(stop_event):
+    start = time.time()
+    while not stop_event.is_set():
+        elapsed = time.time() - start
+        print(f"\rElapsed time: {int(elapsed // 60)}m {int(elapsed % 60)}s", end='')
+        time.sleep(1)
+    print()
+
+stop_event = threading.Event()
+thread = threading.Thread(target=simple_stopwatch, args=(stop_event,))
+thread.start()
+
+# execute query with error handling
+try:
     df = pd.read_sql(full_query, engine_src)
 except Exception as e:
     stop_event.set()
@@ -332,16 +299,7 @@ print(f"Loaded {len(df):,} rows.")
 </code></pre>
 							</div>
 
-							<div class="code-container">
-								<pre><code>def simple_stopwatch(stop_event):
-    start = time.time()
-    while not stop_event.is_set():
-        elapsed = time.time() - start
-        print(f"\rElapsed time: {int(elapsed // 60)}m {int(elapsed % 60)}s", end='')
-        time.sleep(1)
-    print()
-</code></pre>
-							</div>
+
 
 							<p class="mt-4">
 								By showing progress live, you make ETL
@@ -352,50 +310,264 @@ print(f"Loaded {len(df):,} rows.")
 							<hr class="mt-5">
 
 							<!-- PART 4: DATA EXTRACTION AND MONITORING --------->
-							<h4 class="mt-5" id="part4">Part 4: Batch Insert &amp; Load Validation</h4>
+							<h3 class="mt-5" id="part4">Part 4: Batch Insert &amp; Load Validation</h3>
 							<p class="mt-4">
 								Loading millions of rows in one go is risky. This pipeline uses 10,000-row batches with
 								row count tracking and batch-level error handling for resilience.
 							</p>
+							
+							<p>This mitigates risks by:</p>
+							<ul>
+								<li>Breaking inserts into 10,000-row batches</li>
+								<li>Tracking rows as they load</li>
+								<li>Handling errors at the batch level so the rest of the pipeline continues</li>
+							</ul>
 
 							<div class="code-container">
-								<pre><code>for i in range(0, len(df), batch_size):
+								<pre><code>batch_size = 10_000
+rows_loaded = [0]
+
+for i in range(0, len(df), batch_size):
     batch = df.iloc[i:i+batch_size]
     mode = 'replace' if i == 0 else 'append'
+
     try:
-        batch.to_sql('TargetTable', engine_target, if_exists = mode, index = False, schema = 'dbo')
+        batch.to_sql(
+            'TargetTable',
+            engine_target,
+            if_exists=mode,
+            index=False,
+            schema='dbo'
+        )
         rows_loaded[0] += len(batch)
+        print(f"Loaded {rows_loaded[0]:,} rows so far...")
     except Exception as e:
         print(f"\nError inserting batch {i//batch_size + 1}: {e}")
 </code></pre>
 							</div>
 
 							<p class="mt-4">
-								This method ensures that even if one batch fails, the rest of the load proceeds. In
-								production environments with tight nightly load windows, partial success is better than
-								total failure.
+								<em>Why matters</em>
 							</p>
+							<ul>
+								<li><b>Resilience</b>: If one batch fails, others still complete to avoid all-or-nothing failures.</li>
+								<li><b>Operational fit</b>: Nightly load windows can be tight. Partial success means teams still get data by morning, with issues isolated to a single batch.</li>
+								<li><b>Scalability</b>: This pattern scales seamlessly whether the pipeline processes thousands or tens of millions of rows.</li>
+							</ul>
 
 
 							<hr class="mt-5">
 
 
+							
 							<!-- FINAL TAKEAWAYS -------------------------------->
-							<h4 class="mt-5" id="part4">Final Takeaway</h4>
+							<h4 class="mt-5">Beyond SQL Server: Portable by Design</h4>
 							<p class="mt-4">
-								This project is a blueprint for scalable reporting automation. It embodies the
-								principles I apply when building analytics solutions that deliver lasting business
-								value:
+								Although this demo uses Microsoft SQL Server, the pattern is portable across modern data platforms. The core
+								logic adapts with minimal changes to connection strings or SQL dialects.
+							</p>
+							<p class="mt-4">Here’s how it maps to popular systems:</p>
+
+							<div class="accordion" id="accordionExample">
+								<!-- SQL Server -->
+								<div class="card">
+									<div class="card-header" id="headingSQL">
+										<h2 class="mb-0">
+											<button
+												class="btn btn-link btn-block text-left"
+												type="button"
+												data-toggle="collapse"
+												data-target="#collapseSQL"
+												aria-expanded="true"
+												aria-controls="collapseSQL">
+												SQL Server
+											</button>
+										</h2>
+									</div>
+									<div id="collapseSQL" class="collapse show" aria-labelledby="headingSQL" data-parent="#accordionExample">
+										<div class="card-body">
+											<ul class="mb-0">
+												<li>
+													<b>Discovery:</b> <code>sys.databases</code> +
+													<code>INFORMATION_SCHEMA.TABLES</code> (e.g., <code>archive_YYYY</code>)
+												</li>
+												<li><b>Filter:</b> <code>DATEADD(MONTH, -6, GETDATE())</code></li>
+												<li><b>Union:</b> <code>UNION ALL</code> in a CTE</li>
+												<li><b>Load:</b> <code>pandas.to_sql(..., method='multi')</code> or bulk insert</li>
+												<li><b>Monitoring:</b> Stopwatch threads for elapsed time and row count</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<!-- PostgreSQL -->
+								<div class="card">
+									<div class="card-header" id="headingPG">
+										<h2 class="mb-0">
+											<button
+												class="btn btn-link btn-block text-left collapsed"
+												type="button"
+												data-toggle="collapse"
+												data-target="#collapsePG"
+												aria-expanded="false"
+												aria-controls="collapsePG">
+												PostgreSQL
+											</button>
+										</h2>
+									</div>
+									<div id="collapsePG" class="collapse" aria-labelledby="headingPG" data-parent="#accordionExample">
+										<div class="card-body">
+											<ul class="mb-0">
+												<li>
+													<b>Discovery:</b> <code>information_schema</code> for schemas like
+													<code>archive_YYYY</code>
+												</li>
+												<li><b>Filter:</b> <code>NOW() - INTERVAL '6 months'</code></li>
+												<li><b>Union:</b> <code>UNION ALL</code> in a CTE</li>
+												<li><b>Load:</b> <code>to_sql</code> or <code>COPY</code> to staging</li>
+												<li><b>Monitoring:</b> Stopwatch with chunked reads if large</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<!-- Snowflake -->
+								<div class="card">
+									<div class="card-header" id="headingSF">
+										<h2 class="mb-0">
+											<button
+												class="btn btn-link btn-block text-left collapsed"
+												type="button"
+												data-toggle="collapse"
+												data-target="#collapseSF"
+												aria-expanded="false"
+												aria-controls="collapseSF">
+												Snowflake
+											</button>
+										</h2>
+									</div>
+									<div id="collapseSF" class="collapse" aria-labelledby="headingSF" data-parent="#accordionExample">
+										<div class="card-body">
+											<ul class="mb-0">
+												<li>
+													<b>Discovery:</b> <code>INFORMATION_SCHEMA.TABLES</code> across databases like
+													<code>ARCHIVE_YYYY</code>
+												</li>
+												<li><b>Filter:</b> <code>DATEADD(month, -6, CURRENT_TIMESTAMP)</code></li>
+												<li><b>Union:</b> <code>UNION ALL</code> in a CTE</li>
+												<li><b>Load:</b> <code>COPY INTO</code> for bulk or connector inserts</li>
+												<li><b>Monitoring:</b> Warehouse usage plus app-side timers</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<!-- Amazon Redshift -->
+								<div class="card">
+									<div class="card-header" id="headingRS">
+										<h2 class="mb-0">
+											<button
+												class="btn btn-link btn-block text-left collapsed"
+												type="button"
+												data-toggle="collapse"
+												data-target="#collapseRS"
+												aria-expanded="false"
+												aria-controls="collapseRS">
+												Amazon Redshift
+											</button>
+										</h2>
+									</div>
+									<div id="collapseRS" class="collapse" aria-labelledby="headingRS" data-parent="#accordionExample">
+										<div class="card-body">
+											<ul class="mb-0">
+												<li><b>Discovery:</b> Catalog tables for schemas like <code>archive_YYYY</code></li>
+												<li><b>Filter:</b> <code>GETDATE() - INTERVAL '6 months'</code></li>
+												<li><b>Union:</b> <code>UNION ALL</code> in a CTE</li>
+												<li><b>Load:</b> <code>COPY</code> from S3 with staging then merge</li>
+												<li><b>Monitoring:</b> WLM or queue metrics plus app timers</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<!-- Google BigQuery -->
+								<div class="card">
+									<div class="card-header" id="headingBQ">
+										<h2 class="mb-0">
+											<button
+												class="btn btn-link btn-block text-left collapsed"
+												type="button"
+												data-toggle="collapse"
+												data-target="#collapseBQ"
+												aria-expanded="false"
+												aria-controls="collapseBQ">
+												Google BigQuery
+											</button>
+										</h2>
+									</div>
+									<div id="collapseBQ" class="collapse" aria-labelledby="headingBQ" data-parent="#accordionExample">
+										<div class="card-body">
+											<ul class="mb-0">
+												<li>
+													<b>Discovery:</b> <code>INFORMATION_SCHEMA.TABLES</code> in datasets like
+													<code>archive_YYYY</code>
+												</li>
+												<li><b>Filter:</b> <code>TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 6 MONTH)</code></li>
+												<li><b>Union:</b> <code>UNION ALL</code> view or query</li>
+												<li><b>Load:</b> Load jobs or external tables with append</li>
+												<li><b>Monitoring:</b> Job status APIs plus app timers</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<!-- Databricks (PySpark) -->
+								<div class="card">
+									<div class="card-header" id="headingDBX">
+										<h2 class="mb-0">
+											<button
+												class="btn btn-link btn-block text-left collapsed"
+												type="button"
+												data-toggle="collapse"
+												data-target="#collapseDBX"
+												aria-expanded="false"
+												aria-controls="collapseDBX">
+												Databricks (PySpark)
+											</button>
+										</h2>
+									</div>
+									<div id="collapseDBX" class="collapse" aria-labelledby="headingDBX" data-parent="#accordionExample">
+										<div class="card-body">
+											<ul class="mb-0">
+												<li>
+													<b>Discovery:</b> <code>SHOW DATABASES</code> and <code>SHOW TABLES</code> for databases
+													like <code>archive_YYYY</code>
+												</li>
+												<li><b>Filter:</b> <code>add_months(current_timestamp(), -6)</code></li>
+												<li><b>Union:</b> <code>DataFrame.unionByName</code></li>
+												<li><b>Load:</b> Delta write with <code>.mode('append')</code></li>
+												<li><b>Monitoring:</b> Spark UI actions plus app timers</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							
+							<!-- FINAL TAKEAWAYS -------------------------------->
+							<h4 class="mt-5">Wrapping Up</h4>
+							<p class="mt-4">
+								This project is a blueprint for scalable reporting automation. The design principles are the same ones I apply in real-world analytics solutions:
 							</p>
 							<ul class="mt-3">
 								<li class="pb-2">
-									Remove waste through automation
+									Eliminate waste through automation: free people from repetitive, manual work.
 								</li>
 								<li class="pb-2">
-									Increase resilience with error handling and monitoring
+									Build resilience with error handling and monitoring: prevent outages before they happen.
 								</li>
 								<li>
-									Design for scale so solutions adapt with the business
+									Design for scale: make sure today’s solution can flex for tomorrow’s demands.
 								</li>
 							</ul>
 							<p class="mt-4">
@@ -422,19 +594,18 @@ print(f"Loaded {len(df):,} rows.")
 								</ul>
 							</div>
 						</div>
-<!--
-
 						<div class="sidebar-widget">
 							<h5 class="widget-title font-alt">GITHUB REPO</h5>
 							<div class="widget-categories">
 								<ul class="list-style-1">
-									<li><a href="#" target="_blank"><i
-												class="fab fa-github-alt"></i> Dynamic ETL Pipeline</a></li>
-
+									<li>
+										<a href="https://github.com/JF-30000/dynamic_etl_pipeline" target="_blank">
+											<i class="fab fa-github-alt"></i> Dynamic ETL Pipleine SQL Server
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>
-						-->
 
 						<div class="sidebar-widget">
 							<h5 class="widget-title font-alt">TECH STACK</h5>
@@ -444,6 +615,11 @@ print(f"Loaded {len(df):,} rows.")
 									<li><a href="">Pandas</a></li>
 									<li><a href="">SQLAlchemy</a></li>
 									<li><a href="">SQL Server</a></li>
+									<li><a href="">PostgreSQL</a></li>
+									<li><a href="">Snowflake</a></li>
+									<li><a href="">BigQuery</a></li>
+									<li><a href="">Amazon Redshift</a></li>
+									<li><a href="">Databricks	</a></li>
 									<li><a href="">pyodbc</a></li>
 									<li><a href="">Jupyter</a></li>
 									<li><a href="">GitHub</a></li>
@@ -505,6 +681,32 @@ print(f"Loaded {len(df):,} rows.")
 	<script src="static/plugin/magnific/jquery.magnific-popup.min.js"></script>
 	<!-- custom -->
 	<script src="static/js/custom.js"></script>
+
+<script>
+  $(function () {
+    // Show tab on click (works for both top tabs and dropdown items)
+    $('[data-toggle="tab"]').on('click', function (e) {
+      // If you still have any <a href="#..."> in there, this prevents jumping.
+      e.preventDefault && e.preventDefault();
+      $(this).tab('show');
+    });
+
+    // Update URL hash without scrolling
+    $('[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      var target = $(e.target).data('target'); // e.g. "#bigquery"
+      if (target) history.replaceState(null, null, target);
+      // Close mobile dropdown if open
+      $(this).closest('.dropdown-menu').prev('.dropdown-toggle').dropdown('toggle');
+    });
+
+    // Open correct tab if a hash is present on load
+    var hash = window.location.hash;
+    if (hash) {
+      var $trigger = $('[data-target="' + hash + '"]');
+      if ($trigger.length) $trigger.tab('show');
+    }
+  });
+</script>
 
 </body>
 <!-- ./END BODY -->
