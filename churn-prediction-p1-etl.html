@@ -62,7 +62,7 @@
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html#portfolio">Projects</a></li>
 									<li class="breadcrumb-item">
-										<a href="churn-predicition.html">Churn Prediction</a>
+										<a href="churn-prediction.html">Churn Prediction</a>
 									</li>
 									<li class="breadcrumb-item active" aria-current="page">ETL Pipeline</li>
 								</ol>
@@ -71,10 +71,10 @@
 							<div class="bog-content-area">
 								<h2 class="mt-5">Part 1: ETL Pipeline</h2>
 								<blockquote class="blockquote-left mt-5">
-									<h5>Where messy data becomes model-ready</h5>
+									<h5>From messy to model-ready</h5>
 									<br />
-									Analysis can't begin without clean data. This pipeline transforms noisy
-									member data into a clean, structured foundation for predictive modeling.<br /><br />
+									Real-world data is lumpy. This pipeline turns raw member records into tidy, trustworthy tables ready for analysis 
+									and modeling by validating, deduping, and standardizing along the way.<br /><br />
 									<a href="https://github.com/JF-30000/churn_prediction/blob/main/01_etl.ipynb" target="_blank">View full notebook on GitHub <i class="fa fa-chevron-right"></i></a>
 								</blockquote>
 
@@ -88,9 +88,9 @@
 								
 								<h4 class="mt-5 mb-3">What This Pipeline Delivers</h4>
 								<ul>
-									<li>Standardizes messy referral sources for accurate marketing attribution</li>
-									<li>Fixes unrealistic ages using demographic-based imputation</li>
-									<li>Formats binary and categorical fields for machine learning compatibility</li>
+									<li>Standardizes messy referral sources so each channel gets the right credit.</li>
+									<li>Fixes unrealistic ages using demographic-based estimates.</li>
+									<li>Makes binary and category fields ML-friendly and consistent.</li>
 									<li>Outputs a clean dataset for dashboards, models, and strategy decisions</li>
 								</ul>
 
@@ -110,7 +110,7 @@
 								</p>
 
 								<p class="pt-1">
-									<b>Messy Raw Inputs (Python)</b>
+									<b>Messy Raw Inputs</b>
 								</p>
 
 								<div class="code-container">
@@ -125,13 +125,9 @@ print(df_members['referral_source'].sort_values().unique())
  'walkin']
   </code></pre>
 								</div>
-
-								<p>
-									These values were standardized into clean, consolidated categories.
-								</p>
-								
-								<p class="pt-3">
-									<b>Standardization Logic (Python)</b>
+							
+								<p class="pt-1">
+									<b>Standardization Logic</b>
 								</p>
 								<div class="code-container">
 									<pre><code>
@@ -151,7 +147,7 @@ df_members['referral_source'] = df_members['referral_source'].replace(referral_m
 								</div>
 
 								<p class="pt-1">
-									<b>After Cleanup (Python)</b>
+									<b>After Cleanup</b>
 								</p>
 								<div class="code-container">
 									<pre><code>
@@ -309,7 +305,9 @@ for table_name, ddl in ddl_statements.items():
 								
 								<h4 class="mt-5">Ensuring Reliable Insights from the Start</h4>
 								<p class="mt-3">
-									Data rarely arrives clean, and the success of any analytics project hinges on the quality of its inputs. This pipeline tackles that challenge head-on, validating, cleaning, and structuring data at the source to ensure all downstream analytics, models, and strategic decisions are built on a foundation of trust.
+									Because data rarely arrives clean, the success of any analytics project hinges on the quality of its inputs.
+									This pipeline validates, cleans, and structures data at the source to ensure all downstream
+									decisions are built on a trustworthy foundation.
 								</p>
 
 								
@@ -322,11 +320,11 @@ for table_name, ddl in ddl_statements.items():
 									early signs of churn such as low engagement, short membership tenures, and
 									inconsistent behavior.
 								</p>
-								<a href="churn-predicition.html" class="btn btn-dark btn-sm mt-3" role="button">
+								<a href="churn-prediction.html" class="btn btn-dark btn-sm mt-3" role="button">
 									<i class="fa fa-chevron-left"></i> Project Home
 								</a>
 								<a
-									href="churn-predicition-p2-eda.html"
+									href="churn-prediction-p2-eda.html"
 									class="btn btn-custom btn-sm mt-3"
 									role="button">
 									Part 2: Churn EDA <i class="fa fa-chevron-right"></i>
@@ -340,10 +338,10 @@ for table_name, ddl in ddl_statements.items():
 								<h5 class="widget-title font-alt">SECTIONS</h5>
 								<div class="widget-categories">
 									<ul class="list-style-1">
-										<li><a href="churn-predicition-p1-etl.html">Part 1 - ETL Pipeline</a></li>
-										<li><a href="churn-predicition-p2-eda.html">Part 2 - Churn EDA</a></li>
-										<li><a href="churn-predicition-p3-models.html">Part 3 - Prediction Modeling</a></li>
-										<li><a href="churn-predicition-p4-strategic-rec.html">Part 4 - Strategy</a></li>
+										<li><a href="churn-prediction-p1-etl.html">Part 1 - ETL Pipeline</a></li>
+										<li><a href="churn-prediction-p2-eda.html">Part 2 - Churn EDA</a></li>
+										<li><a href="churn-prediction-p3-models.html">Part 3 - Prediction Modeling</a></li>
+										<li><a href="churn-prediction-p4-strategic-rec.html">Part 4 - Strategy</a></li>
 									</ul>
 								</div>
 							</div>

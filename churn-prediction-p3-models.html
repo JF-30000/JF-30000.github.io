@@ -100,7 +100,7 @@
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.html#portfolio">Projects</a></li>
 									<li class="breadcrumb-item">
-										<a href="churn-predicition.html">Member Churn Prediction</a>
+										<a href="churn-prediction.html">Member Churn Prediction</a>
 									</li>
 									<li class="breadcrumb-item active" aria-current="page">Prediction Modeling</li>
 								</ol>
@@ -133,25 +133,21 @@
 								<hr class="mt-5">
 
 								<h4 class="mt-5">Understanding the Models</h4>
-								<p class="mt-3">
-									<b>Logistic Regression</b>: This model acts as a transparent calculator for risk.
-								</p>
+								<p class="mt-3"><b>Logistic Regression</b>: The simple, honest baseline</p>
 								<ul>
-									<li><b>Easy to interpret</b>: clear direction/magnitude of each factor.</li>
-									<li><b>Fast to train</b>: great as a baseline and for diagnostics.</li>
-									<li><b>Limitation</b>: linear by design; won’t capture complex interactions.</li>
+									<li class="mb-2"><b>What it does:</b> adds up signals and gives you a churn risk score.</li>
+									<li class="mb-2"><b>Why use it:</b> easy to read and explain; quick to train.</li>
+									<li><b>Limitation:</b> it sees straight lines, so it can miss twisty patterns.</li>
 								</ul>
-							
-								<p class="mt-3">
-									<b>Random Forest</b>: This model operates as a team of decision-makers, finding intricate patterns.
-								</p>
+
+								<p class="mt-3"><b>Random Forest</b>: Many small trees voting</p>
 								<ul>
-									<li><b>High flexibility</b>: captures non-linear, interaction effects.</li>
-									<li><b>Useful for drivers</b>: feature importances highlight what matters most.</li>
-									<li><b>Limitation</b>: harder to explain single predictions; slower to train/deploy.</li>
+									<li class="mb-2"><b>What it does:</b> captures “if-this-then-that” patterns and how factors work together.</li>
+									<li class="mb-2"><b>Why use it:</b> often more accurate; highlights which features matter most.</li>
+									<li><b>Limitation:</b> harder to explain a single prediction; a bit heavier to run and deploy.</li>
 								</ul>
-							
-								<hr class="mt-5">
+
+								<hr class="mt-5" />
 								
 								<h4 class="mt-5">Which Model Performs Best?</h4>
 								<p class="mt-3">
@@ -160,46 +156,48 @@
 									precision and slightly higher accuracy. Random Forest still recovers a few more churners (higher recall) but
 									at the cost of noisier positive flags.
 								</p>
+
 								<table class="table table-sm mt-4">
 									<thead>
 										<tr>
 											<th>Model</th>
+											<th>AUC</th>
 											<th>Accuracy</th>
 											<th>Precision (churn)</th>
 											<th>Recall (churn)</th>
-											<th>AUC</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td>Logistic Regression</td>
+											<td>0.650</td>
 											<td>0.678</td>
 											<td>0.577</td>
 											<td>0.294</td>
-											<td>0.65</td>
 										</tr>
 										<tr>
 											<td>Random Forest</td>
 											<td>0.610</td>
+											<td>0.610</td>
 											<td>0.426</td>
 											<td>0.344</td>
-											<td>0.61</td>
 										</tr>
 									</tbody>
 								</table>
+
 								<h5 class="mt-5">Confusion Matrix Takeaways (Test Set)</h5>
 								<p class="mt-3">This scorecard details:</p>
-								<ul class="mt-4">
-									<li><b>True Positives</b>: Members correctly predicted to churn.</li>
-									<li><b>True Negatives</b>: Members correctly predicted to not churn.</li>
-									<li><b>False Positives</b>: Members predicted to churn, but didn't (wasted intervention effort).</li>
+								<ul class="mt-2">
+									<li class="mb-2"><b>True Positives</b>: Members correctly predicted to churn.</li>
+									<li class="mb-2"><b>True Negatives</b>: Members correctly predicted to not churn.</li>
+									<li class="mb-2"><b>False Positives</b>: Members predicted to churn, but didn't (wasted intervention effort).</li>
 									<li><b>False Negatives</b>: Members predicted to not churn, but did (missed opportunity to intervene).</li>
 								</ul>
 								<p class="mt-4">
-									As the confusion matrices below illustrate, <b>Logistic Regression proved more effective at accurately flagging
+									<b>Logistic Regression proved more effective at accurately flagging
 									churners without generating as many misleading alerts</b>. While Random Forest identified a slightly higher
-									percentage of actual churners (recall at 0.344 vs. Logistic Regression’s 0.294), Logistic Regression’s
-									notably better precision (0.577 vs. 0.426) and overall accuracy (0.678 vs. 0.610) mean its positive
+									percentage of actual churners (recall at <b>0.344</b> vs. Logistic Regression’s <b>0.294</b>), Logistic Regression’s
+									notably better precision (<b>0.577</b> vs. <b>0.426</b>) and overall accuracy (<b>0.678</b> vs. <b>0.610</b>) mean its positive
 									predictions are much more reliable. This makes Logistic Regression the more practical choice for targeted
 									interventions, leading to more efficient and effective retention campaigns.
 								</p>
@@ -216,12 +214,33 @@
 									<b>AUC</b> was used to illustrate overall predictive power. This score measures overall ranking power from 0.0 to 1.0 (higher is better). It indicates how well a model distinguishes between churners and non-churners, with higher scores being better.
 								</p>
 								<ul>
-									<li><b>Logistic Regression achieved an AUC of 0.65</b>, indicating good predictive capability.</li>
-									<li>In comparison, <b>Random Forest had an AUC of 0.61</b>, showing it was slightly less effective.</li>
+									<li class="mb-2"><b>Logistic Regression</b> achieved an AUC of <b>0.65</b>, indicating good predictive capability.</li>
+									<li>In comparison, <b>Random Forest</b> had an AUC of <b>0.61</b>, showing it was slightly less effective.</li>
 								</ul>
+								
 								<a class="image-popup" href="static/img/model/ROC.png">
 									<img src="static/img/model/roc_side_by_side.png" alt="ROC" />
 								</a>
+								
+								<h5 class="mt-4">Chart Interpretation</h5>
+								<ul class="mt-4">
+									<li class="mb-3"><b>What’s on the axes:</b><br>
+										The x-axis is False Positive Rate (how often we flag a non-churner), the y-axis is True Positive Rate (how many real churners we catch).</li>
+									<li class="mb-3"><b>The diagonal line:</b><br>
+										That’s random guessing. Any curve above it is doing better than chance. Curves closer to the top-left are stronger (more true positives with fewer false positives).
+									<li class="mb-3"><b>AUC in one sentence:</b><br>
+										AUC is the area under the ROC curve. It’s the chance that the model ranks a random churner higher-risk than a random non-churner.
+										0.50 = coin flip, 0.60–0.70 = modest but useful, 0.80+ = strong (context matters).
+									</li>
+									<li class="mb-3"><b>Comparing the lines:</b><br>
+										The Logistic Regression curve sits above the Random Forest curve overall, so its AUC is higher (LR ~0.650 vs RF ~0.610 in my tests). That means LR separates churners/non-churners a bit better on average.
+									</li>
+									<li class="mb-3"><b>Picking a point on the curve (threshold):</b><br>
+										The ROC curve shows all possible trade-offs. You choose <b>one operating point</b> (a probability cut-off) based on cost/benefit:
+									</li>
+								</ul>
+								
+
 								
 
 								
@@ -229,9 +248,9 @@
 
 								<h4 class="mt-5">What Factors Drive Churn Risk? (Feature Importance)</h4>
 								<p class="mt-3">
-									Beyond prediction, understanding why guides action. For targeting, Logistic Regression is the operational
-									pick due to its higher precision (0.577) and accuracy (0.678) making positive flags more trustworthy. For the why,
-									Random Forest is the clearer lens: it captures non-linearities and interactions, so its feature importances
+									Beyond prediction, understanding <em>why</em> guides action. For targeting, Logistic Regression is the operational
+									pick due to its higher precision (<b>0.577</b>) and accuracy (<b>0.678</b>) making positive flags more trustworthy. For the why,
+									Random Forest is the clearer lens. It captures non-linearities and interactions, so its feature importances
 									tell a richer, easier-to-explain story than LR’s log-odds coefficients.
 								</p>
 								<p class="mt-3">
@@ -300,11 +319,11 @@
 									With modeling complete, Part 4 will focus on strategy and recommendations moving forward.
 								</p>
 
-								<a href="churn-predicition-p2-eda.html" class="btn btn-dark btn-sm mt-3" role="button">
+								<a href="churn-prediction-p2-eda.html" class="btn btn-dark btn-sm mt-3" role="button">
 									<i class="fa fa-chevron-left"></i> Part 2: Churn EDA
 								</a>
 								<a
-									href="churn-predicition-p4-strategic-rec.html"
+									href="churn-prediction-p4-strategic-rec.html"
 									class="btn btn-custom btn-sm mt-3"
 									role="button">
 									Part 4: Strategy <i class="fa fa-chevron-right"></i>
@@ -321,10 +340,10 @@
 								<h5 class="widget-title font-alt">SECTIONS</h5>
 								<div class="widget-categories">
 									<ul class="list-style-1">
-										<li><a href="churn-predicition-p1-etl.html">Part 1 - ETL Pipeline</a></li>
-										<li><a href="churn-predicition-p2-eda.html">Part 2 - Churn EDA</a></li>
-										<li><a href="churn-predicition-p3-models.html">Part 3 - Prediction Modeling</a></li>
-										<li><a href="churn-predicition-p4-strategic-rec.html">Part 4 - Strategy</a></li>
+										<li><a href="churn-prediction-p1-etl.html">Part 1 - ETL Pipeline</a></li>
+										<li><a href="churn-prediction-p2-eda.html">Part 2 - Churn EDA</a></li>
+										<li><a href="churn-prediction-p3-models.html">Part 3 - Prediction Modeling</a></li>
+										<li><a href="churn-prediction-p4-strategic-rec.html">Part 4 - Strategy</a></li>
 									</ul>
 								</div>
 							</div>
