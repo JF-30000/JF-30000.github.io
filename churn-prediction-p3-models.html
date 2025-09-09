@@ -110,15 +110,35 @@
 								<h2 class="mt-5">Part 3: Churn Prediction Modeling</h2>
 
 								<blockquote class="blockquote-left mt-5">
-									<h5>Turning exploration into prediction</h5>
-									<br />
-									This section focuses on building forecasting tools to spot members at risk of churning
-									<b>before they actually leave</b>. Member behavior and characteristics are used to train machine learning
-									models, estimating individual churn risk and highlighting key influencing factors. The goal is to move from
-									seeing patterns to acting proactively.<br /><br />
-									<a href="https://github.com/JF-30000/churn_prediction/blob/main/03_churn_modeling.ipynb" target="_blank">
-										View full notebook on GitHub <i class="fa fa-chevron-right"></i> 
-									</a><br>
+								    <h5>Turning exploration into prediction</h5>
+								    <br />
+								    This section focuses on building forecasting tools to spot members at risk of churning
+								    <b>before they actually leave</b>. Member behavior and characteristics are used to train machine learning
+								    models, estimating individual churn risk and highlighting key influencing factors. The goal is to move from
+								    seeing patterns to acting proactively.<br /><br />
+								    <a href="https://github.com/JF-30000/churn_prediction/blob/main/03_churn_modeling.ipynb" target="_blank">
+								        View full notebook on GitHub <i class="fa fa-chevron-right"></i>
+								    </a>
+								    <br /><br />
+								    <div class="text-uppercase mb-2">TL;DR</div>
+								    <ul class="mb-2">
+								        <li><b>Context:</b> predict likely churners so retention outreach isn’t guesswork.</li>
+								        <li>
+								            <b>Role:</b> built and evaluated Logistic Regression (LR) and Random Forest (RF); selected the
+								            operational model and explained drivers.
+								        </li>
+								        <li>
+								            <b>Approach:</b> stratified train/test split; standardized features; LR (L2) for clean targeting; RF
+								            for feature importance; ROC/AUC and confusion matrices; threshold chosen to favor precision over
+								            noise.
+								        </li>
+								        <li>
+								            <b>Result:</b> LR selected for targeting — <b>AUC 0.650</b>, <b>Accuracy 0.678</b>,
+								            <b>Precision 0.577</b>, <b>Recall 0.294</b>. RF trails on AUC (<b>0.610</b>) but offers clearer
+								            “why” via top drivers; slightly higher recall (<b>0.344</b>) with noisier positives.
+								        </li>
+								        <li><b>Tech:</b> Python (pandas, scikit-learn, Plotly), Jupyter.</li>
+								    </ul>
 								</blockquote>
 
 								<h4 class="mt-5">Modeling Approach: Choosing the Right Tools</h4>
@@ -362,14 +382,14 @@
 								<h5 class="widget-title font-alt">TECH STACK</h5>
 								<div class="widget-popular-tag">
 									<ul class="list-style-tag">
-										<li><a href="#">Python</a></li>
-										<li><a href="#">Pandas</a></li>
-										<li><a href="#">Scikit-learn</a></li>
-										<li><a href="#">SQL</a></li>
-										<li><a href="#">Snowflake</a></li>
-										<li><a href="#">Plotly</a></li>
-										<li><a href="#">Jupyter</a></li>
-										<li><a href="#">GitHub</a></li>
+                                        <li>Python</li>
+                                        <li>Pandas</li>
+                                        <li>Scikit-learn</li>
+                                        <li>SQL</li>
+                                        <li>Snowflake</li>
+                                        <li>Plotly</li>
+                                        <li>Jupyter</li>
+                                        <li>GitHub</li>
 									</ul>
 								</div>
 							</div>
@@ -378,14 +398,14 @@
 								<h5 class="widget-title font-alt">FOCUS AREAS</h5>
 								<div class="widget-popular-tag">
 									<ul class="list-style-tag">
-										<li><a href="#">Churn Prediction</a></li>
-										<li><a href="#">ETL Pipelines</a></li>
-										<li><a href="#">Data Cleaning</a></li>
-										<li><a href="#">Feature Engineering</a></li>
-										<li><a href="#">Model Evaluation</a></li>
-										<li><a href="#">Cloud Data Integration</a></li>
-										<li><a href="#">KPI Development</a></li>
-										<li><a href="#">Business Strategy Alignment</a></li>
+                                        <li>Churn Prediction</li>
+										<li>ETL Pipelines</li>
+                                        <li>Data Cleaning</li>
+                                        <li>Feature Engineering</li>
+                                        <li>Model Evaluation</li>
+                                        <li>Cloud Data Integration</li>
+                                        <li>KPI Development</li>
+                                        <li>Business Strategy Alignment</li>
 									</ul>
 								</div>
 							</div>
