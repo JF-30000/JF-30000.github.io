@@ -109,7 +109,7 @@ Table of contents
 
 /* Override Bootstrap card header background */
 .accordion .card-header {
-	background-color: #D3D9D4 !important;
+	background-color: #f5f5f5 !important;
 	padding-top: 0.4rem;
 	padding-bottom: 0.4rem;
 }
