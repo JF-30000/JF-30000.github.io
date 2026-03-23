@@ -109,153 +109,180 @@
 								<h2 class="mt-5">Part 2: Exploratory Data Analysis (EDA)</h2>
 
 								<blockquote class="blockquote-left mt-5">
-								    <h5>Why do some members stay while others disappear?</h5>
-								    <br />
-								    This section highlights key behavioral patterns and member characteristics by analyzing tenure, engagement,
-								    and referral source, revealing early signs of churn risk.<br /><br />
+								    This section examines the behavioral patterns, demographic signals, and engagement trends that separate members who stay from members who leave.<br /><br />
 								    <a href="https://github.com/JF-30000/churn_prediction/blob/main/02_eda.ipynb" target="_blank"
 								        >View full notebook on GitHub <i class="fa fa-chevron-right"></i
 								    ></a>
 								    <br /><br />
-								    <div class="text-uppercase mb-2">TL;DR</div>
-								    <ul class="mb-2">
-								        <li>
-								            <b>Context:</b> exploratory analysis to understand churn patterns in a dataset of
-								            <b>2,081</b> members across <b>9</b> studios.
-								        </li>
-								        <li>
-								            <b>Role:</b> led EDA and data quality checks; framed hypotheses and feature candidates for modeling.
-								        </li>
-								        <li>
-								            <b>Approach:</b> sanity checks (duplicates, missingness, outliers); class balance and churn rate;
-								            segment cuts by tenure, engagement, referral source, and region; leakage checks;
-								            correlation/collinearity review; time trends/cohorts.
-								        </li>
-								        <li>
-								            <b>Result:</b> engagement and tenure emerged as primary drivers; younger cohorts churn more;
-								            standardized categories and produced a clean, model-ready feature set.
-								        </li>
-								        <li><b>Tech:</b> Python (pandas, matplotlib/plotly), Jupyter.</li>
-								    </ul>
 								</blockquote>
 
-								<h3 class="mt-5">EDA Highlights</h3>
+								<h3 class="mt-5">The Population at a Glance</h3>
 
-								<h5 class="mt-4">Studio Locations &amp; Churn Trends</h5>
 								<p class="mt-3">
-									Studio addresses were geocoded to visualize coverage across metro Denver, helping pinpoint regional churn trends and location-driven performance differences. Churn rates across locations range from 29% to 38%, underscoring the importance of location-specific retention strategies.
+									Before looking for patterns, it helps to know the overall churn rate. How big is the problem?
 								</p>
 
-
-								<a class="image-popup" href="static/img/eda/00_map.png">
-									<img
-										src="static/img/eda/00_map.png"
-										alt="Mapped Studio Locations" />
-								</a>
-
-								
-								<!-- Studio Member Volume and Churn Rate Takeaways -->
-								<h5 class="mt-5">Studio Member Volume and Churn Rate Takeaways</h5>
-								<ul class="mt-3">
-									<li class="mb-2"><b>High-risk studios</b>: Highlands Ranch (38.4%), Hilltop Village (37.9%), and Castle Rock (36.7%) show the highest churn, pointing to potential engagement or operational issues.</li>
-									<li class="mb-2"><b>Top performer</b>: Lowry leads with the lowest churn (29.2%), suggesting strong onboarding or retention practices.</li>
-									<li class="mb-2">Studios like Uptown Denver and Applewood Village (mid-30% churn) are stable but offer room for optimization.</li>
-								</ul>
-								<a class="image-popup" href="static/img/eda/00_volume_churn.png">
-									<img src="static/img/eda/00_volume_churn.png" alt="volume churn" />
-								</a>
-
-
-								<hr class="mt-5">
-
-
-								<!-- Demographic Insights by Location -->
-								<h5 class="mt-5">Demographic Insights by Location</h5>
-								<p class="mt-3">Understanding member demographics across locations is crucial for tailored retention.</p>
-								<ul class="mt-3">
-									<li class="mb-3">
-										<b>Age Distribution</b>: Age often serves as a proxy for stability and preferences. Certain studios skew
-										older (e.g., Broomfield), which may correlate with lower churn or different class preferences.
-									</li>
-								</ul>
-								<a class="image-popup" href="static/img/eda/02_age_dist.png">
-									<img src="static/img/eda/02_age_dist.png" alt="age dist" />
-								</a>
-
-								<ul class="mt-3">
-									<li class="mt-4 mb-3">
-										<b>Gender Mix</b>: Every studio maintains a relatively balanced gender mix (roughly 30-40% Female, Male,
-										and Non-binary representation), reflecting an inclusive environment and presenting opportunities for
-										personalized engagement.
-									</li>
-									<ul>
-										<li class="mb-3">
-											<b>Female-Leaning Studios</b>: Applewood Village (42.5%) and Hilltop Village (38.6%) have the
-											highest share of Female members, potentially signaling a brand position that resonates with this
-											demographic.
-										</li>
-										<li class="mb-4">
-											<b>Male-Leaning Studios</b>: Castle Rock (36.7%) and Lowry (36.6%) have slightly higher Male
-											representation, suggesting differences in class demand or referral patterns, which can inform
-											staffing and marketing efforts.
-										</li>
-									</ul>
-
-								</ul>
-									<a class="image-popup" href="static/img/eda/02_gender_dist.png">
-										<img src="static/img/eda/02_gender_dist.png" alt="Gender Distribution" />
-									</a>
-
-
-
-
-								<hr class="mt-5">
-								
-								<!-- HEATMAP ---------------------->
-								<h5 class="mt-5">What do loyal members have in common?</h5>
-								<p class="pt-3">
-									This chart reveals the relationships between member behaviors and traits. Darker colors indicate stronger correlations (blue for positive, red for negative).
+								<p class="mt-3">
+									Out of 2,081 members, 726 churned. That is a 34.9% churn rate, meaning roughly 1 in 3 members left. The remaining 65.1% stayed active. That baseline sets the target for the model: can behavioral signals predict which members fall into which group before they make the decision to leave?
 								</p>
-								<ul class="mt-4">
-									<li class="mb-3">
-										<b>Unexpected Finding</b>: Auto-renew settings had almost no impact on churn. Despite common assumptions, members who manually renew aren't any more likely to leave.
-									</li>
-									<li class="mb-3">
-										<b>Engagement is Key</b>: Members with higher engagement scores are significantly less likely to churn, reinforcing that consistency builds commitment.
-									</li>
-									<li class="mb-3">
-										<b>Tenure Matters</b>: Longer-standing members show more loyalty, supporting the value of cohort-based onboarding and long-term retention strategies.
-									</li>
-								</ul>
-								<a class="image-popup" href="static/img/eda/02_heatmap.png">
-									<img src="static/img/eda/02_heatmap.png" alt="Correlation Heatmap" />
-								</a>
-
-								<hr class="mt-5">
 								
-								<h4 class="mt-5">So What? Turning Exploration into Action</h4>
-								<p class="pt-2">
-									Each insight from this analysis directly points to specific strategies studio leadership can use to improve member retention:
+								
+								
+								<p class="mt-3">
+									<b>Finding 1: Churn Varies Significantly by Location</b>
 								</p>
-								<ul class="mt-4">
-									<li class="pb-3">
-										<b>Engagement is Key to Loyalty</b>: Consistent attendance and diverse class participation are strong loyalty signals. Focus on keeping members active and engaged is crucial for long-term loyalty.
-									</li>
-									<li class="pb-3">
-										<b>The Six-Month Mark is Critical</b>: Churn risk drops significantly once members pass their six-month anniversary. This highlights the importance of strong onboarding and targeted retention efforts during those crucial first few months.
-									</li>
-									<li>
-										<b>Demographics Matter by Location</b>: Studios with younger, more transient member populations might need different approaches than those with older, more stable demographics. Tailor pricing, communication, or class offerings to fit each studio's unique member base.
-									</li>
-								</ul>
+								<p class="mt-3">
+									Not all studios are losing members at the same rate. Some locations have a churn problem. Others are doing something right.
+								</p>
 
-								<hr class="mt-5">
+								<p class="mt-3">
+									Churn rates across the 9 studio locations range from 29.2% to 38.4%, nearly a 10-percentage-point spread. That gap is not random. It points to location-specific differences in onboarding, member engagement, class offerings, or community culture.
+								</p>
+								
+								<a class="image-popup" href="static/img/churn/eda/00_volume_churn.png">
+									<img src="static/img/churn/eda/00_volume_churn.png" alt="volume_churn" />
+								</a>
+								
+								<p class="mt-3">
+									The members who show up consistently are the ones who stick around. The members who drift from their routine are the ones who cancel.
+								</p>
+								
+								
+								<p class="mt-3">
+									<b>Finding 2: Engaged Members Stay. Disengaged Members Leave</b>
+								</p>
+								<p class="mt-3">
+									This is the most important finding in the EDA and the one that drives the model most strongly. Churned members had an average engagement score of 52.4. Active members averaged 63.2. That is a nearly 11-point gap on the same 0 to 100 scale.
+								</p>
+								
+								<p class="mt-3">
+									Weekly class attendance tells the same story. Active members attended an average of 2.5 classes per week over the prior six months. Churned members averaged 2.0. Half a class per week sounds small. Across thousands of members and months of data, it is a reliable early warning signal.
+								</p>
+								
+								<a class="image-popup" href="static/img/churn/eda/02_heatmap.png">
+									<img src="static/img/churn/eda/02_heatmap.png" alt="heatmap" />
+								</a>
+								
+								
+								<p class="mt-3">
+									<b>Finding 3: Engaged Members Stay. Disengaged Members Leave</b>
+								</p>
+								<p class="mt-3">
+									New members are the most vulnerable. If they do not build a habit in the first six months, they are significantly more likely to cancel.
+								</p>
+								<p class="mt-3">
+									Churn risk is highest in the first few months of membership and drops sharply once members cross the six-month threshold. Members who make it past that point have established a routine and are far more likely to stay long term.
+								</p>
+								
+								<a class="image-popup" href="static/img/churn/eda/03_tenure.png">
+									<img src="static/img/churn/eda/03_tenure.png" alt="tenure" />
+								</a>
+								
+								<p class="mt-3">
+									New members are the most vulnerable. If they do not build a habit in the first six months, they are significantly more likely to cancel.The average tenure for churned members was 26.8 months. For active members it was 36.9 months. That 10-month gap confirms what the tenure chart shows: longevity and loyalty go hand in hand.
+								</p>
+								<p class="mt-3">
+									The practical implication is direct. The highest-return retention investment is not trying to win back members who have already decided to leave. It is intervening early with new members before the habit breaks.
+								</p>
+								
+								
+								
+								<p class="mt-3">
+									<b>Finding 4: The Auto-Renew Surprise</b>
+								</p>
+								<p class="mt-3">
+									Members on auto-renew aren’t necessarily less likely to churn. Auto-renew status had almost no meaningful relationship with churn. Members who manually renewed their membership were not meaningfully more likely to cancel than those on automatic billing. This finding is worth calling out explicitly because it challenges a common assumption that often drives retention strategy.
+								</p>
+								<p class="mt-3">
+									Investing in auto-renew enrollment as a retention lever is unlikely to move the needle. Engagement is the lever. Auto-renew is just a payment preference.
+								</p>
+								
+								
+								
+								<p class="mt-3">
+									<b>Finding 5: Demographics Vary by Location</b>
+								</p>
+								<p class="mt-3">
+									Each studio has a slightly different member profile, and that should matter for how retention strategies are tailored.
+								</p>
+								<p class="mt-3">
+									Age distributions vary across studios. Broomfield skews older, which tends to correlate with more stable attendance patterns. Studios with younger member bases may need different engagement approaches to build the kind of routine that drives long-term retention.
+								</p>
+								<p class="mt-3">
+									Gender mix is relatively balanced across all nine locations, with roughly 30 to 40% representation across Female, Male, and Non-binary members. A few studios lean slightly in one direction: Applewood Village and Hilltop Village have the highest share of Female members at 42.5% and 38.6% respectively. Castle Rock and Lowry skew slightly more Male.
+								</p>
+								<a class="image-popup" href="static/img/churn/eda/02_age_dist.png">
+									<img src="static/img/churn/eda/02_age_dist.png" alt="age_dist" />
+								</a>
+								
+								<a class="image-popup" href="static/img/churn/eda/02_gender_dist.png">
+									<img src="static/img/churn/eda/02_gender_dist.png" alt="gender_dist" />
+								</a>
+								<p class="mt-3">
+									These demographic differences do not drive churn directly. But they inform how retention communications, class offerings, and outreach should be personalized by location rather than applied uniformly across the network.
+								</p>
+								
+								<hr class="mt-5" />
+
+								<h3 class="mt-5">What the Numbers Say Side by Side</h3>
+
+								<p class="mt-3">
+									The clearest summary of the EDA is a simple comparison of averages between churned and active members:
+								</p>
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
+									<thead>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Metric</th>
+											<th style="padding: 10px 14px; text-align: left">Active Members</th>
+											<th style="padding: 10px 14px; text-align: left">Churned Members</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Average engagement score</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">63.2</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #8b3a3a">52.4</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Average tenure (months)</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">36.9</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #8b3a3a">26.8</strong>
+											</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												Avg weekly classes (last 6 months)
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">2.5</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #8b3a3a">2.0</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px">Monthly membership cost</td>
+											<td style="padding: 9px 14px">$184.30</td>
+											<td style="padding: 9px 14px">$184.60</td>
+										</tr>
+									</tbody>
+								</table>
+								
+								<p class="mt-3">
+									The membership cost row is worth noting. Churned and active members pay almost exactly the same amount. Behavior is driving churn.
+								</p>
+								
+
 								
 								<!-- UP NEXT -->
-								<h4 class="mt-5"><b>Up Next</b>: Part 3 - Churn Models</h4>
-								<p class="pt-3">
-									The exploratory groundwork is complete. Part 3 shifts to predictive modeling to quantify churn risk and identify which member traits have the greatest impact. The focus moves from <i>who</i> is churning to understanding <i>why</i>.
-								</p>
+								<h4 class="mt-5"><b>Up Next</b>: Part 3 - Churn Prediction Modeling</h4>
 
 								<a
 									href="churn-prediction-p1-etl.html"

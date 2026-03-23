@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>Jim Fischer</title>
+
+		<!-- Font Icon -->
+		<link href="static/plugin/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+		<link href="static/plugin/themify-icons/themify-icons.css" rel="stylesheet" />
+
+		<!-- Plugin CSS -->
+		<link href="static/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="static/plugin/owl-carousel/css/owl.carousel.min.css" rel="stylesheet" />
+		<link href="static/plugin/magnific/magnific-popup.css" rel="stylesheet" />
+
+		<!-- Theme Style -->
+		<link href="static/css/styles.css" rel="stylesheet" />
+		<link href="static/css/color/color-1.css" rel="stylesheet" id="color_theme" />
+		<link rel="icon" href="favicon.ico" />
+	</head>
+
+	<body data-spy="scroll" data-target="#navbarRyan" data-offset="98">
+		<!-- Loading Spinner -->
+		<div id="loading">
+			<div class="load-circle"><span class="one"></span></div>
+		</div>
+
+		<!-- Header -->
+		<header>
+			<nav class="navbar header-nav header-nav fixed-top navbar-expand-lg">
+				<div class="container">
+					<a class="navbar-brand" href="index.html">Jim <span class="theme-bg"></span></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarRyan">
+						<span></span><span></span><span></span>
+					</button>
+					<div class="collapse navbar-collapse justify-content-end" id="navbarRyan">
+						<ul class="navbar-nav">
+							<li><a class="nav-link" href="index.html#home">Home</a></li>
+							<li><a class="nav-link" href="index.html#aboutus">About</a></li>
+							<li><a class="nav-link" href="index.html#portfolio">Projects</a></li>
+							<li><a class="nav-link" href="index.html#contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<!-- Main -->
+		<main>
+			<section class="page-title" style="background-color: #212a31">
+				<div class="container"></div>
+			</section>
+
+			<section class="section blog-lising">
+				<div class="container">
+					<div class="row">
+						<!-- Content Area -->
+						<div class="col-12 col-md-12 col-lg-9 p-50px-r md-p-15px-r">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html#portfolio">Projects</a></li>
+									<li class="breadcrumb-item">
+										<a href="ab-testing.html">Payment Recovery A/B Testing</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">
+										Data Preparation &amp; EDA
+									</li>
+								</ol>
+							</nav>
+
+							<div class="bog-content-area">
+								<h2 class="mt-5">Part 1: Data Prep &amp; EDA</h2>
+								<blockquote class="blockquote-left mt-5">
+									This section covers how raw credit data was cleaned and shaped into a population worth testing and what that population revealed before a single message was considered.<br /><br />
+
+									
+									<a
+										href="https://github.com/JF-30000/churn_prediction/blob/main/01_etl.ipynb"
+										target="_blank"
+										>View full notebook on GitHub <i class="fa fa-chevron-right"></i></a
+									><br />
+								</blockquote>
+
+
+								<hr class="mt-5" />
+
+								
+								<h4 class="mt-5">The Dataset</h4>
+								<p class="mt-3">
+									This project needed a population of people who had recently missed a payment. The 
+									<a href="https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset" target="_blank">
+										UCI Default of Credit Card Clients dataset</a
+									>
+									of 30,000 credit card holders was used as a stand-in for a healthcare billing population, filtered down to
+									the 6,355 members who were one or two months behind on payments. Recently delinquent enough that outreach
+									could still move the needle.
+								</p>
+								
+								<p class="mt-3">
+									Using a proxy dataset is a documented limitation. The methodology and rollout framework apply directly to a live billing environment with real member data.
+								</p>
+								
+								<p class="mt-3">
+									<i>Population after filtering:</i>
+								</p>
+								
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
+									<thead>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Metric</th>
+											<th style="padding: 10px 14px; text-align: left">Value</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												Total experiment population
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												6,355 members
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												1-month delinquent
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												3,688 (58%)
+											</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												2-month delinquent
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												2,667 (42%)
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px">Baseline recovery rate</td>
+											<td style="padding: 9px 14px">51.3%</td>
+										</tr>
+									</tbody>
+								</table>
+
+
+								<hr class="mt-5" />
+
+								
+								<h4 class="mt-5">Data Prep</h4>
+								<p class="mt-3">
+									Education and marital status fields contained undocumented codes that were mapped to known categories. All 24 column names were renamed for readability. The outcome variable was reframed from "defaulted next month" to "recovered," meaning a member who resolved their balance within the observation window.
+								</p>								
+								<p class="mt-3">
+									Six behavioral and demographic features were then created to describe each member in a way that would be meaningful for the experiment.
+								</p>
+								<p class="mt-3">
+									<i>Engineered features:</i>
+								</p>
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
+									<thead>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Feature</th>
+											<th style="padding: 10px 14px; text-align: left">Description</th>
+											<th style="padding: 10px 14px; text-align: left">Why it matters</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>Balance tier</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												Low, Mid, High based on outstanding balance
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												Higher balances may respond differently to tone
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>First-time miss</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												Member has no prior delinquency history
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												First-timers are most likely to respond to empathetic outreach
+											</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>Prior delinquency count</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												Number of delinquent months in the prior 5 months
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												Chronic delinquents may be less message-sensitive
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>High risk flag</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												High balance or 2+ prior delinquent months
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												Useful for conservative rollout decisions
+											</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>Age band</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												18-29, 30-39, 40-49, 50+
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												Controls for demographic variation in the experiment
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px"><strong>Delinquency month</strong></td>
+											<td style="padding: 9px 14px">1-month or 2-month delinquent</td>
+											<td style="padding: 9px 14px">
+												Captures urgency and recency of the missed payment
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								
+								<p class="mt-3">
+									The most important of these is <b>first-time miss</b>. A member who has never missed a payment before is a
+									fundamentally different audience than someone with a pattern of delinquency.
+								</p>
+								<p class="mt-3">
+									The cleaning and feature engineering logic lives in two standalone Python modules,
+									<code>data_prep.py</code> and <code>feature_engineering.py</code>, rather than inside the notebook. This
+									keeps the analysis clean and makes the pipeline reusable on any new dataset without touching the experiment
+									or modeling code.
+								</p>
+
+
+								<hr class="mt-5" />
+
+								
+								<h4 class="mt-5">What the Data Revealed</h4>
+								<p class="mt-3">
+									<b>Finding 1: Recovery rate splits sharply by segment</b><br>
+									Out of every 100 first-time missers, 64 resolved their outstanding balance and paid. Out of every 100 repeat missers, only 44 did. That is a 20-percentage-point gap within the same population, before any message is sent. It means these two groups are not the same audience and should not be treated as one.
+										<a class="image-popup" href="static/img/ab-testing/eda_recovery_by_segment.png ">
+											<img src="static/img/ab-testing/eda_recovery_by_segment.png " alt="eda_recovery_by_segment" />
+										</a>
+								</p>
+								<p class="mt-3">
+									<b>Finding 2: The more times someone has missed, the less likely they are to pay</b><br>
+									Recovery rate drops consistently as prior delinquency increases, from 63.9% for members with no payment history issues down to 31.6% for members who missed payments in every one of the prior five months. Members at that low end likely need a different intervention entirely. A better-worded message is probably not enough.
+										<a class="image-popup" href="static/img/ab-testing/eda_recovery_by_prior_delinquency.png ">
+											<img src="static/img/ab-testing/eda_recovery_by_prior_delinquency.png " alt="eda_recovery_by_prior_delinquency" />
+										</a>
+								</p>
+								
+								<p class="mt-3">
+									<i>Recovery rate by prior delinquency history:</i>
+								</p>
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
+									<thead>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Prior Delinquent Months</th>
+											<th style="padding: 10px 14px; text-align: left">Recovery Rate</th>
+											<th style="padding: 10px 14px; text-align: left">n</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">0 — first missed payment</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">63.9%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">2,369</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">1</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">56.8%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">1,181</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">2</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">45.3%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">768</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">3</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">39.5%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">689</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">4</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">43.1%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">232</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px">5 — missed every prior month</td>
+											<td style="padding: 9px 14px"><strong style="color: #8b3a3a">31.6%</strong></td>
+											<td style="padding: 9px 14px">1,116</td>
+										</tr>
+									</tbody>
+								</table>
+								
+								<p class="mt-3">
+									<b>Finding 3: Balance size determines where the dollar impact lives</b><br>
+									Low-balance members recover at the highest rate but carry the smallest individual balances. High-balance members represent $4.61M in total outstanding balance but recover at a lower rate. The middle tier is where a messaging intervention generates the most dollar impact per additional recovery.
+										<a class="image-popup" href="static/img/ab-testing/eda_balance_distribution.png  ">
+											<img src="static/img/ab-testing/eda_balance_distribution.png " alt="eda_balance_distribution" />
+										</a>
+								</p>
+								
+								<p class="mt-3">
+									<i>Balance tier breakdown:</i>
+								</p>
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
+									<thead>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Balance Tier</th>
+											<th style="padding: 10px 14px; text-align: left">Recovery Rate</th>
+											<th style="padding: 10px 14px; text-align: left">Total Balance</th>
+											<th style="padding: 10px 14px; text-align: left">n</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>Low</strong> (under $900 USD)
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">57.5%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">$925K</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">3,905</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>Mid</strong> ($900 to $3,100 USD)
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">40.5%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">$2.94M</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">1,644</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px"><strong>High</strong> (over $3,100 USD)</td>
+											<td style="padding: 9px 14px">43.1%</td>
+											<td style="padding: 9px 14px">$4.61M</td>
+											<td style="padding: 9px 14px">806</td>
+										</tr>
+									</tbody>
+								</table>
+								
+								<p class="mt-3">
+									First-time missers with low balances recover at 70.1%, the highest rate in the entire population. Repeat missers show far less variation across balance tiers, ranging from 41.3% to 45.3%. Their behavior is more consistent, and consistently harder to move with messaging alone.
+										<a class="image-popup" href="static/img/ab-testing/eda_segment_heatmap.png   ">
+											<img src="static/img/ab-testing/eda_segment_heatmap.png  " alt="eda_segment_heatmap" />
+										</a>
+								</p>
+								
+
+								<hr class="mt-5" />
+
+								
+								<h4 class="mt-5">Experiment Design</h4>
+								<p class="mt-3">
+									Before the experiment ran, one key question had to be answered: how big does the lift need to be to actually matter? A 1 or 2 percentage point improvement might be real but not worth the effort of changing the outreach program. Three percentage points was the judgment call, the smallest improvement that would justify retraining staff, updating templates, and managing a rollout.
+								</p>
+								<p class="mt-3">
+									From there, a calculation called a power analysis determined how many members were needed to detect that improvement reliably. Think of it like a sample size calculator. Feed it the baseline recovery rate, the minimum improvement you care about, and how confident you want to be in the result, and it tells you the minimum number of members needed. That number came out to 4,992 total. With 6,355 available, the experiment had more than enough.
+								</p>
+								
+								<p class="mt-3">
+									<b>Were the two groups actually balanced?</b>
+								</p>
+								
+								<p class="mt-3">
+									Once members were assigned, a statistical check confirmed the two groups were genuinely equivalent before the experiment ran. Think of it like checking that two sports teams are evenly matched before the game starts. If one group happened to have significantly more first-time missers or high-balance members, any difference in results could be explained by group composition rather than the message.
+								</p>
+								
+								<p class="mt-3">
+									The check produces a p-value for each variable, a number between 0 and 1 that measures how similar the two groups are on that characteristic. A p-value of 1.0 means the groups are perfectly matched. A p-value below 0.05 would signal a meaningful imbalance worth investigating. Every variable came back well above that threshold. Both groups entered the experiment on equal footing.
+								</p>
+								
+								<p class="mt-3">
+									<i>Balance validation results:</i>
+								</p>
+								
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
+									<thead>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Variable</th>
+											<th style="padding: 10px 14px; text-align: left">p-value</th>
+											<th style="padding: 10px 14px; text-align: left">Result</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">First-time miss</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">1.0000</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<span style="color: #1a6b52; font-weight: bold">Pass</span>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Balance tier</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">0.9956</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<span style="color: #1a6b52; font-weight: bold">Pass</span>
+											</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">High risk</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">1.0000</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<span style="color: #1a6b52; font-weight: bold">Pass</span>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Delinquency month</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">1.0000</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<span style="color: #1a6b52; font-weight: bold">Pass</span>
+											</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px">Sex</td>
+											<td style="padding: 9px 14px">0.9591</td>
+											<td style="padding: 9px 14px"><span style="color: #1a6b52; font-weight: bold">Pass</span></td>
+										</tr>
+									</tbody>
+								</table>
+								
+								<p class="mt-3">
+									All five variables passed. The two groups entered the experiment on equal footing, which means any difference in recovery rate that emerges can be attributed to the message and not to a flaw in how members were assigned.
+								</p>
+								
+								<p class="mt-3">
+										<a class="image-popup" href="static/img/ab-testing/design_balance_check.png ">
+											<img src="static/img/ab-testing/design_balance_check.png " alt="design_balance_check.png" />
+										</a>
+								</p>
+								
+
+								<hr class="mt-5" />
+
+								
+								<p class="mt-3">
+									The 51.3% baseline recovery rate becomes the starting point for the Bayesian model in Part 2. The segment findings, particularly the first-time miss gap, drive both the stratification strategy and the phased rollout recommendation in Part 3. And the $4.9M in unrecovered balances gives the business impact model its dollar foundation.
+								</p>
+								
+
+
+								<!-- Navigation Buttons -->
+								<h4 class="mt-5"><b>Up Next</b>: Part 2: Bayesian A/B Test</h4>
+								<a href="ab-testing.html" class="btn btn-dark btn-sm mt-3" role="button">
+									<i class="fa fa-chevron-left"></i> Project Home
+								</a>
+								<a href="ab-testing-p2-bayesian-ab-test.html" class="btn btn-custom btn-sm mt-3" role="button">
+									Part 2: Bayesian A/B Test <i class="fa fa-chevron-right"></i>
+								</a>
+							</div>
+						</div>
+
+						<!-- SIDE BAR -->
+						<div class="col-12 col-md-12 col-lg-3 md-m-30px-b mt-5">
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">SECTIONS</h5>
+								<div class="widget-categories">
+									<ul class="list-style-1">
+										<li>
+											<a href="ab-testing-p1-data-prep.html"
+												>Part 1: Data Prep &amp; EDA</a
+											>
+										</li>
+										<li>
+											<a href="ab-testing-p2-bayesian-ab-test.html"
+												>Part 2: Bayesian A/B Test</a
+											>
+										</li>
+										<li>
+											<a href="#.html"
+												>Part 3: Evidence-Driven Rollout</a
+											>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">GITHUB REPO</h5>
+								<div class="widget-categories">
+									<ul class="list-style-1">
+										<!--<li><a href="https://github.com/JF-30000/churn_prediction" target="_blank"><i class="fab fa-github-alt"></i> Churn Prediction</a></li>-->
+									</ul>
+								</div>
+							</div>
+
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">TECH STACK</h5>
+								<div class="widget-popular-tag">
+									<ul class="list-style-tag">
+										<li>Python</li>
+										<li>Pandas</li>
+										<li>NumPy</li>
+										<li>SciPy</li>
+										<li>Matplotlib</li>
+										<li>Seaborn</li>
+										<li>Jupyter</li>
+										<li>GitHub</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">FOCUS AREAS</h5>
+								<div class="widget-popular-tag">
+									<ul class="list-style-tag">
+										<li>Bayesian A/B Testing</li>
+										<li>Experiment Design</li>
+										<li>Statistical Analysis</li>
+										<li>Segmentation</li>
+										<li>Revenue Forecasting</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- /.END SIDE BAR -->
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer -->
+		<footer class="footer footer-blog">
+			<div class="container">
+				<div class="footer-logo">
+					<span>Jim Fischer <span class="theme-bg"></span></span>
+				</div>
+				<ul class="social-icons">
+					<li>
+						<a href="https://github.com/JF-30000?tab=repositories" target="_blank"
+							><i class="fab fa-github-alt"></i
+						></a>
+					</li>
+					<li>
+						<a href="https://www.linkedin.com/in/jamesafischer" target="_blank"
+							><i class="fab fa-linkedin-in"></i
+						></a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+
+		<!-- Scripts -->
+		<script src="static/js/jquery-3.2.1.min.js"></script>
+		<script src="static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$(".image-popup").magnificPopup({
+					type: "image",
+					mainClass: "mfp-with-zoom",
+					zoom: { enabled: true, duration: 300, easing: "ease-in-out" },
+					image: { verticalFit: true }
+				});
+			});
+		</script>
+		<script src="static/plugin/bootstrap/js/popper.min.js"></script>
+		<script src="static/plugin/bootstrap/js/bootstrap.min.js"></script>
+		<script src="static/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+		<script src="static/plugin/isotope/isotope.pkgd.min.js"></script>
+		<script src="static/plugin/magnific/jquery.magnific-popup.min.js"></script>
+		<script src="static/js/custom.js"></script>
+	</body>
+</html>

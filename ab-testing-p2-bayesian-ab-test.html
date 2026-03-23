@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>Jim Fischer</title>
+
+		<!-- Font Icon -->
+		<link href="static/plugin/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+		<link href="static/plugin/themify-icons/themify-icons.css" rel="stylesheet" />
+
+		<!-- Plugin CSS -->
+		<link href="static/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="static/plugin/owl-carousel/css/owl.carousel.min.css" rel="stylesheet" />
+		<link href="static/plugin/magnific/magnific-popup.css" rel="stylesheet" />
+
+		<!-- Theme Style -->
+		<link href="static/css/styles.css" rel="stylesheet" />
+		<link href="static/css/color/color-1.css" rel="stylesheet" id="color_theme" />
+		<link rel="icon" href="favicon.ico" />
+	</head>
+
+	<body data-spy="scroll" data-target="#navbarRyan" data-offset="98">
+		<!-- Loading Spinner -->
+		<div id="loading">
+			<div class="load-circle"><span class="one"></span></div>
+		</div>
+
+		<!-- Header -->
+		<header>
+			<nav class="navbar header-nav header-nav fixed-top navbar-expand-lg">
+				<div class="container">
+					<a class="navbar-brand" href="index.html">Jim <span class="theme-bg"></span></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarRyan">
+						<span></span><span></span><span></span>
+					</button>
+					<div class="collapse navbar-collapse justify-content-end" id="navbarRyan">
+						<ul class="navbar-nav">
+							<li><a class="nav-link" href="index.html#home">Home</a></li>
+							<li><a class="nav-link" href="index.html#aboutus">About</a></li>
+							<li><a class="nav-link" href="index.html#portfolio">Projects</a></li>
+							<li><a class="nav-link" href="index.html#contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<!-- Main -->
+		<main>
+			<section class="page-title" style="background-color: #212a31">
+				<div class="container"></div>
+			</section>
+
+			<section class="section blog-lising">
+				<div class="container">
+					<div class="row">
+						<!-- Content Area -->
+						<div class="col-12 col-md-12 col-lg-9 p-50px-r md-p-15px-r">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html#portfolio">Projects</a></li>
+									<li class="breadcrumb-item">
+										<a href="ab-testing.html">Payment Recovery A/B Testing</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">
+										Bayesian A/B Test
+									</li>
+								</ol>
+							</nav>
+
+							<div class="bog-content-area">
+								<h2 class="mt-5">Part 2: Bayesian A/B Test</h2>
+								<blockquote class="blockquote-left mt-5">
+									This section compares the two messages, estimates the probability that empathetic outreach outperforms transactional messaging, and breaks the result down by segment to find where the effect is strongest and where it is not.<br /><br />
+
+									
+									<a
+										href="https://github.com/JF-30000/churn_prediction/blob/main/01_etl.ipynb"
+										target="_blank"
+										>View full notebook on GitHub <i class="fa fa-chevron-right"></i></a
+									><br />
+								</blockquote>
+
+								<h4 class="mt-5">Why Bayesian?</h4>
+								<p class="mt-3">
+									Instead of asking "did it work?", Bayesian analysis asks "how confident are we that it worked, and by how much?"
+								</p>
+								<p class="mt-3">
+									Most statistical methods give a binary answer: significant or not significant. Bayesian analysis gives a probability. In this project that probability is expressed as P(B&gt;A), is the likelihood that the empathetic message outperforms the transactional one. A result of 99.9% means the model evaluated one million simulated comparisons and empathetic messaging came out ahead in all but a fraction of them. 
+								</p>
+								<p class="mt-3">
+									It also produces a credible interval, a range of plausible values for the true lift. It says "we are 90% confident the true lift falls between 3.2% and 7.3%." That range is what drives the conservative, expected, and optimistic revenue scenarios in Part 3.
+								</p>
+
+								
+								<hr class="mt-5" />
+								
+								<h4 class="mt-5">Starting With What We Know</h4>
+								<p class="mt-3">
+									Every Bayesian model starts with a prior, an initial assumption about the outcome before any experiment data is seen. Here the prior is centered on the 51.3% baseline recovery rate observed in Part 1. It is set intentionally weak, equivalent to only 10 prior observations, so the experiment data drives the result rather than the starting assumption.
+								</p>
+								<p class="mt-3">
+									This is similar to a weather forecast that starts with historical averages before adjusting for today's conditions. The history informs the starting point.
+										<a class="image-popup" href="static/img/ab-testing/bayes_prior.png ">
+											<img src="static/img/ab-testing/bayes_prior.png " alt="bayes_prior" />
+										</a>
+								</p>
+
+								
+								<hr class="mt-5" />
+								
+								<h4 class="mt-5">The Results</h4>
+								<p class="mt-3">
+									After outcomes were recorded for all 6,355 members, the Bayesian model compared the two groups. Here is what it found:
+								</p>
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
+									<thead>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Metric</th>
+											<th style="padding: 10px 14px; text-align: left">Control (A)</th>
+											<th style="padding: 10px 14px; text-align: left">Treatment (B)</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Recovery rate</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">46.9%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">52.1%</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Posterior mean</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">46.9%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">52.1%</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px">90% Credible interval</td>
+											<td style="padding: 9px 14px">[45.4%, 48.3%]</td>
+											<td style="padding: 9px 14px">[50.6%, 53.6%]</td>
+										</tr>
+									</tbody>
+								</table>
+								
+								<p class="mt-3">
+									<b>P(Treatment B &gt; Control A): 99.9% Expected lift: +5.2% 90% credible interval on lift: [+3.2%, +7.3%]</b>
+								</p>
+								
+								<p class="mt-3">
+									The brackets represent the range of plausible outcomes. We are 90% confident the true lift falls somewhere between +3.2% and +7.3%, with +5.2% being the single most likely outcome. Using the weather metaphore, think of it like a forecast where the meteorologist does not say it will be exactly 72 degrees, they give you a range. The brackets are that range. The entire range is above zero, meaning there is no realistic scenario in this model where the transactional message outperforms the empathetic one.
+								</p>
+								
+								<p class="mt-3">
+									The credible intervals for the two groups do not overlap. That means there is no plausible scenario within the model where the transactional message outperforms the empathetic one.
+										<a class="image-popup" href="static/img/ab-testing/bayes_posteriors.png ">
+											<img src="static/img/ab-testing/bayes_posteriors.png  " alt="bayes_posteriors" />
+										</a>
+								</p>
+
+								
+								<hr class="mt-5" />
+								
+								
+								<h4 class="mt-5">Segmented Results: Where the Effect Is Strongest</h4>
+								<p class="mt-3">
+									The overall result is strong, but the segmented results are where the analysis becomes useful for deployment decisions.
+								</p>
+								<p class="mt-3">
+									The same model was run separately within each key segment. The goal was to find where empathetic messaging works best, where it works modestly, and where the evidence is not yet strong enough to act on.
+								</p>
+								
+								<p class="mt-3">
+									The chart below shows two things for each segment: the bar represents the lift, how much better the empathetic message performed over the transactional one. The number above each bar is P(B&gt;A), the probability that the result is real and not just a statistical coincidence. A taller bar means a bigger improvement. A higher P(B&gt;A) means more confidence in that improvement. The segments you want to deploy to first are the ones with both.
+										<a class="image-popup" href="static/img/ab-testing/bayes_segment_results.png ">
+											<img src="static/img/ab-testing/bayes_segment_results.png " alt="bayes_segment_results" />
+										</a>
+								</p>
+								
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
+									<thead>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Segment</th>
+											<th style="padding: 10px 14px; text-align: left">Control</th>
+											<th style="padding: 10px 14px; text-align: left">Treatment</th>
+											<th style="padding: 10px 14px; text-align: left">Lift</th>
+											<th style="padding: 10px 14px; text-align: left">P(B&gt;A)</th>
+											<th style="padding: 10px 14px; text-align: left">90% CI</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>First-Time Miss</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">60.6%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">70.1%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">+9.5%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">99.9%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">[+6.3%, +12.7%]</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Repeat Miss</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">38.7%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">41.3%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">+2.6%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">95.6%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">[+0.1%, +5.2%]</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">1-Month Delinquent</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">53.9%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">60.7%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">+6.8%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">99.9%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">[+4.2%, +9.5%]</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">2-Month Delinquent</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">37.2%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">40.2%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">+3.0%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">94.2%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<span style="color: #8b3a3a">[-0.1%, +6.1%]</span>
+											</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">First-Time + 1-Month</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">63.1%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">72.7%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">+9.6%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">99.9%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">[+5.8%, +13.3%]</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Standard Risk</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">54.7%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">63.0%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">+8.2%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">99.9%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">[+5.4%, +11.1%]</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px">High Risk</td>
+											<td style="padding: 9px 14px">39.1%</td>
+											<td style="padding: 9px 14px">41.2%</td>
+											<td style="padding: 9px 14px">+2.2%</td>
+											<td style="padding: 9px 14px">89.3%</td>
+											<td style="padding: 9px 14px"><span style="color: #8b3a3a">[-0.7%, +5.0%]</span></td>
+										</tr>
+									</tbody>
+								</table>
+								
+								<p class="mt-5">
+									<b>Three findings drive the deployment recommendation:</b>
+								</p>
+								
+								<p class="mt-3">
+									<b>First-time missers are the clear winner</b><br>
+									A +9.5% lift at 99.9% confidence with a credible interval entirely above zero. This is the most actionable finding in the project. There is no analytical reason to delay deployment to this group.
+								</p>
+								
+								<p class="mt-3">
+									<b>High-risk chronic delinquents are not ready</b><br>
+									The +2.2% lift sounds encouraging until you look at the credible interval: -0.7% to +5.0%. That range includes zero, meaning the true effect could be negative. Deploying here without more evidence is a risk the data does not support.
+								</p>
+								
+								<p class="mt-3">
+									<b>2-month delinquents sit in the middle</b><br>
+									A 94.2% probability that the message works, but the credible interval just clips zero on the low end. Promising but not conclusive. The right call is to monitor Phase 1 and 2 real-world results before committing to this group.
+								</p>
+
+								
+								<hr class="mt-5" />
+								
+								
+								<h4 class="mt-5">A Note on the Method</h4>
+								<p class="mt-3">
+									The math behind this model is simpler than it sounds. Because the outcome here is binary, a member either paid or they did not, the statistical model can calculate its answer directly rather than running thousands of trial-and-error simulations. Think of it like solving a math problem with a formula instead of guessing and checking.
+								</p>
+								
+								<p class="mt-3">
+									To estimate the probability that empathetic messaging is genuinely better, the model ran one million simulated comparisons between the two groups. That might sound like a lot, but it is what gives the 99.9% result its precision. More comparisons means a more reliable answer.
+								</p>
+								
+								<p class="mt-3">
+									The code powering this analysis lives in a standalone Python module called <code>bayesian_ab.py</code>, built alongside the notebooks. It is written to be reusable: point it at any dataset where the outcome is binary and it runs the same analysis without modification. That is intentional. The goal was not just to answer this specific question but to build something that transfers to the next one.
+								</p>
+
+								
+								<hr class="mt-5" />
+								
+								
+								<h4 class="mt-5">The Takeaway</h4>
+								<p class="mt-3">
+									Empathetic messaging works, but it does not work equally for everyone. That distinction is what makes the deployment recommendation in Part 3 more useful than a simple "send the new message to everyone."
+								</p>
+
+								<!-- Navigation Buttons -->
+								<h4 class="mt-5"><b>Up Next</b>: Part 3: Evidence-Driven Rollout</h4>
+								<a href="ab-testing-p1-data-prep.html" class="btn btn-dark btn-sm mt-3" role="button">
+									<i class="fa fa-chevron-left"></i> Part 1: Data Prep &amp; EDA
+								</a>
+								<a href="ab-testing-p3-rollout.html" class="btn btn-custom btn-sm mt-3" role="button">
+									Part 3: Evidence-Driven Rollout <i class="fa fa-chevron-right"></i>
+								</a>
+							</div>
+						</div>
+
+						<!-- SIDE BAR -->
+						<div class="col-12 col-md-12 col-lg-3 md-m-30px-b mt-5">
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">SECTIONS</h5>
+								<div class="widget-categories">
+									<ul class="list-style-1">
+										<li>
+											<a href="ab-testing-p1-data-prep.html"
+												>Part 1: Data Prep &amp; EDA</a
+											>
+										</li>
+										<li>
+											<a href="ab-testing-p2-bayesian-ab-test.html"
+												>Part 2: Bayesian A/B Test</a
+											>
+										</li>
+										<li>
+											<a href="ab-testing-p3-rollout.html"
+												>Part 3: Evidence-Driven Rollout</a
+											>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">GITHUB REPO</h5>
+								<div class="widget-categories">
+									<ul class="list-style-1">
+										<!--<li><a href="https://github.com/JF-30000/churn_prediction" target="_blank"><i class="fab fa-github-alt"></i> Churn Prediction</a></li>-->
+									</ul>
+								</div>
+							</div>
+
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">TECH STACK</h5>
+								<div class="widget-popular-tag">
+									<ul class="list-style-tag">
+										<li>Python</li>
+										<li>Pandas</li>
+										<li>NumPy</li>
+										<li>SciPy</li>
+										<li>Matplotlib</li>
+										<li>Seaborn</li>
+										<li>Jupyter</li>
+										<li>GitHub</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">FOCUS AREAS</h5>
+								<div class="widget-popular-tag">
+									<ul class="list-style-tag">
+										<li>Bayesian A/B Testing</li>
+										<li>Experiment Design</li>
+										<li>Statistical Analysis</li>
+										<li>Segmentation</li>
+										<li>Revenue Forecasting</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- /.END SIDE BAR -->
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer -->
+		<footer class="footer footer-blog">
+			<div class="container">
+				<div class="footer-logo">
+					<span>Jim Fischer <span class="theme-bg"></span></span>
+				</div>
+				<ul class="social-icons">
+					<li>
+						<a href="https://github.com/JF-30000?tab=repositories" target="_blank"
+							><i class="fab fa-github-alt"></i
+						></a>
+					</li>
+					<li>
+						<a href="https://www.linkedin.com/in/jamesafischer" target="_blank"
+							><i class="fab fa-linkedin-in"></i
+						></a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+
+		<!-- Scripts -->
+		<script src="static/js/jquery-3.2.1.min.js"></script>
+		<script src="static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$(".image-popup").magnificPopup({
+					type: "image",
+					mainClass: "mfp-with-zoom",
+					zoom: { enabled: true, duration: 300, easing: "ease-in-out" },
+					image: { verticalFit: true }
+				});
+			});
+		</script>
+		<script src="static/plugin/bootstrap/js/popper.min.js"></script>
+		<script src="static/plugin/bootstrap/js/bootstrap.min.js"></script>
+		<script src="static/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+		<script src="static/plugin/isotope/isotope.pkgd.min.js"></script>
+		<script src="static/plugin/magnific/jquery.magnific-popup.min.js"></script>
+		<script src="static/js/custom.js"></script>
+	</body>
+</html>

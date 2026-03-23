@@ -117,45 +117,108 @@
 							<div class="bog-content-area mb-5">
 								<h1 class="mt-5 mb-3">Fitness Studio Member Churn Prediction</h1>
                                 <p><i>Updated February 2026</i></p>
-								<h4 class="mt-5">Missed workouts. Fading motivation. Silent churn.</h4>
+								<h4 class="mt-5">The members you're about to lose are already showing you the signs</h4>
 								
 								<p class="mt-4">
-									<b>400,000 calories burned</b>. <b>1.9 million steps</b>. <b> 1,100 miles on the treadmill</b>. These personal metrics, achieved as an
-									<a href="https://www.orangetheory.com" target="_blank">Orangetheory Fitness</a> member, reinforce my belief in how data drives improvement. That passion fueled this four-part data science project aimed at identifying early signs of when members quietly stop engaging or cancel their membership (the process known as churn) and turning those signals into actionable retention strategies.
+									Churn rarely happens overnight and members don't cancel out of nowhere. They stop showing up consistently, then occasionally, then not at all. By the time they cancel, the decision was made weeks earlier.
 								</p>
-								<p>
-									Built on a simulated real-world
-									dataset, it mimics the lifecycle of fitness studio churn, tackling common data challenges and making the
-									approach applicable to other subscription-based businesses like fintech or SaaS.
+								<p class="mt-4">
+									This project builds an early warning system for exactly that pattern. Using behavioral and demographic data from 2,081 fitness studio members across 9 locations, it identifies which members are at risk of churning before they leave, and translates those signals into targeted retention strategies a leadership team can act on immediately.
+								</p>
+								<p class="mt-4">
+									The approach is not specific to fitness studios. Any subscription-based business where member engagement can be measured, fitness, healthcare, fintech, SaaS, faces the same fundamental challenge of finding the at-risk customer before they walk out the door.
 								</p>
 
+								
+								<hr class="mt-5" />
+								
+								
+								<h4 class="mt-5">Why Churn Deserves a Dedicated Strategy</h4>
+								<p class="mt-4">
+									Churn, the rate at which customers cancel or stop engaging, drains over
+									<a
+										href="https://www.forbes.com/councils/forbestechcouncil/2023/01/30/how-to-address-customer-churn-with-ai-driven-data-analysis/"
+										target="_blank"
+										>$168 billion</a
+									>
+									from U.S. companies each year. Every churned member represents acquisition cost that now has to be spent
+									again, loyalty that has to be rebuilt from zero, and a gap in revenue forecasting that makes planning
+									harder.
+								</p>
+								<p class="mt-4">
+									Despite the scale of the problem,
+									<a href="https://www.invespcro.com/blog/customer-acquisition-retention/" target="_blank"
+										>only 18% of companies prioritize retention</a
+									>, while 44% focus more on acquiring new customers. Most react only after a member has already left. This
+									project offers a data-driven alternative.
+								</p>
+								
+								
+								<hr class="mt-5" />
+
+								
 								<h4 class="mt-5">Results at a Glance</h4>
 								<ul class="mt-4">
 									<li class="pb-2">
-										<b>Churn Prediction</b>: Engineered a model achieving <b>68% accuracy</b> in forecasting member churn,
-										providing an early warning system for timely, targeted retention efforts.
+										<b>68% accuracy in predicting which members will churn</b><br>
+										The model correctly identifies churners and non-churners 68% of the time. Accuracy measures how often the model gets the overall answer right, across both groups.
 									</li>
 									<li class="pb-2">
-										<b>Actionable Strategic Insights</b>: Identified engagement and membership tenure as the primary drivers of
-										churn, equipping leadership with direct, data-driven levers to optimize retention strategies.
+										<b>58% precision in flagging at-risk members</b><br>
+										Precision measures something more specific: of all the members the model flags as at-risk, how many actually churn? At 58%, the model is right more often than not when it raises a flag, meaning retention resources are directed toward members who genuinely need attention rather than spread thin across the entire base.
 									</li>
 									<li>
-										<b>Efficient &amp; Reliable Outreach</b>: Delivered a model with <b>58% precision</b> in flagging at-risk
-										members, ensuring retention resources are focused efficiently on genuinely vulnerable accounts and
-										minimizing wasted effort.
+										<b>Engagement and tenure identified as the primary churn drivers</b><br>
+										These are the levers leadership can pull directly. Members who disengage early or never build consistent attendance habits are significantly more likely to churn. The model quantifies exactly how much each factor contributes.
 									</li>
 								</ul>
 								
-								<h4 class="mt-5">Churn costs U.S. companies an estimated $168 billion annually</h4>
-								<p class="mt-3">
-									Churn drains over <b>$168 billion</b> from U.S. companies each year (<a
-										href="https://www.forbes.com/councils/forbestechcouncil/2023/01/30/how-to-address-customer-churn-with-ai-driven-data-analysis/"
-										target="_blank"
-										><i>Forbes</i></a
-									>), hitting hardest in sectors like telecom, fintech, and SaaS. This project directly addresses that gap by
-									using behavioral data to spot early risk signals, giving businesses a critical head start on retention.
-									Beyond lost revenue, high churn increases customer acquisition costs, erodes brand loyalty, and disrupts
-									forecasting. Yet, fewer than 1 in 4 companies have a formal retention strategy in place.
+								
+								<hr class="mt-5" />
+
+								
+								<h4 class="mt-5">What the Model Found</h4>
+								<p class="mt-4">
+									Two factors stood out:
+								</p>
+								<p class="mt-4">
+									<b>Engagement score</b>: Members with low or declining engagement are the strongest predictor of upcoming churn. This is the clearest signal and the earliest one available.
+								</p>
+								<p class="mt-4">
+									<b>Membership tenure</b>: The first six months are critical. Members who make it past that window with consistent attendance are significantly more likely to stay long term. Members who don't establish habits early rarely do.
+								</p>
+								<p class="mt-4">
+									Other factors including age, weekly class frequency, and home studio region also contributed. One finding worth noting: auto-renew status was not a significant predictor. Members who auto-renew still churn. The engagement behind the membership matters far more than the billing mechanism.
+								</p>
+								
+								
+								<hr class="mt-5" />
+
+								
+								<h4 class="mt-5">The Recommendation</h4>
+								<p class="mt-4">
+									The model produces an individual churn risk score for every member. That score allows for a tiered outreach strategy:
+								</p>
+								<p class="mt-4">
+									<b>High risk</b>: Direct, personalized outreach from studio staff. A phone call or in-person conversation to understand what's changed and offer a tailored solution.
+								</p>
+								<p class="mt-4">
+									<b>Medium risk</b>: Targeted digital communication. Personalized class suggestions, challenges, or check-ins designed to rebuild engagement.
+								</p>
+								<p class="mt-4">
+									<b>Low risk</b>: General loyalty programs and community initiatives to maintain the habits already in place.
+								</p>
+								<p class="mt-4">
+									This approach focuses retention resources where they are most likely to work, rather than applying the same message to everyone and hoping it lands.
+								</p>
+								
+								
+								<hr class="mt-5" />
+
+								
+								<h4 class="mt-5">A Note on the Data</h4>
+								<p class="mt-4">
+									This project uses a simulated dataset designed to reflect the realistic challenges of fitness studio member data, including inconsistent referral sources, demographic outliers, and behavioral variation across locations. Simulated data allows for full transparency in methodology without exposing real member records. The analytical approach, data pipeline, predictive model, and retention framework are all directly transferable to a live studio environment.
 								</p>
 
 								<blockquote class="blockquote-left mt-5">
@@ -168,30 +231,20 @@
 										<div class="col-md-6">
 											<a href="churn-prediction-p1-etl.html">Part 1 - ETL Pipeline</a><br>
 											Cleans and transforms raw studio data, with the option to load into a Snowflake environment<br><br>
-											<a href="churn-prediction-p2-eda.html">Part 2 - Churn EDA</a><br>
+											<a href="churn-prediction-p2-eda.html">Part 2 - Exploratory Data Analysis</a><br>
 											Explores engagement trends, class behavior, and tenure signals across member segments<br><br>
 										</div>
 										<div class="col-md-6">
 											<a href="churn-prediction-p3-models.html">Part 3 - Churn Prediction Modeling</a><br>
 											Builds and compares logistic regression and random forest models<br><br>
-											<a href="churn-prediction-p4-strategic-rec.html">Part 4 - Next Steps</a><br>
-											Translates model output into targeted retention tactics
+											<a href="churn-prediction-p4-strategic-rec.html">Part 4 - Strategic Recommendations</a><br>
+											Translates model output into a tiered retention tactics
 										</div>
 									</div>
 								</blockquote>
 
-
-								<h4 class="mt-5">Anticipate, Act, Retain</h4>
-								<p class="mt-3">
-									Ultimately, this work empowers operators to anticipate risk, act sooner, personalize outreach, and improve member retention without relying on guesswork.
-								</p>
-
-
-								<h4 class="mt-5"><b>Up Next</b>: Part 1 - ETL Pipeline (Extract, Transform, Load)</h4>
-								<p class="mt-3">
-									Before modeling can happen, the data has to be usable. This step cleans inconsistent referrals, outlier
-									birthdates, and mismatched fields to lay the groundwork for reliable insight.
-								</p>
+								
+								<h4 class="mt-5"><b>Up Next</b>: Part 1 - ETL Pipeline</h4>
 								<a href="churn-prediction-p1-etl.html" class="btn btn-custom btn-sm mt-3" role="button"
 									aria-pressed="true">
 									Part 1: ETL Pipeline

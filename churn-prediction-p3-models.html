@@ -110,179 +110,193 @@
 								<h2 class="mt-5">Part 3: Churn Prediction Modeling</h2>
 
 								<blockquote class="blockquote-left mt-5">
-								    <h5>Turning exploration into prediction</h5>
-								    <br />
-								    This section focuses on building forecasting tools to spot members at risk of churning
-								    <b>before they actually leave</b>. Member behavior and characteristics are used to train machine learning
-								    models, estimating individual churn risk and highlighting key influencing factors. The goal is to move from
-								    seeing patterns to acting proactively.<br /><br />
+								    This section builds the prediction engine. Two machine learning models were trained and compared to identify which members are most likely to cancel before they actually do. The goal is to give studio leadership a reliable list of at-risk members to act on.<br /><br />
 								    <a href="https://github.com/JF-30000/churn_prediction/blob/main/03_churn_modeling.ipynb" target="_blank">
 								        View full notebook on GitHub <i class="fa fa-chevron-right"></i>
 								    </a>
 								    <br /><br />
-								    <div class="text-uppercase mb-2">TL;DR</div>
-								    <ul class="mb-2">
-								        <li><b>Context:</b> predict likely churners so retention outreach isn’t guesswork.</li>
-								        <li>
-								            <b>Role:</b> built and evaluated Logistic Regression (LR) and Random Forest (RF); selected the
-								            operational model and explained drivers.
-								        </li>
-								        <li>
-								            <b>Approach:</b> stratified train/test split; standardized features; LR (L2) for clean targeting; RF
-								            for feature importance; ROC/AUC and confusion matrices; threshold chosen to favor precision over
-								            noise.
-								        </li>
-								        <li>
-								            <b>Result:</b> LR selected for targeting — <b>AUC 0.650</b>, <b>Accuracy 0.678</b>,
-								            <b>Precision 0.577</b>, <b>Recall 0.294</b>. RF trails on AUC (<b>0.610</b>) but offers clearer
-								            “why” via top drivers; slightly higher recall (<b>0.344</b>) with noisier positives.
-								        </li>
-								        <li><b>Tech:</b> Python (pandas, scikit-learn, Plotly), Jupyter.</li>
-								    </ul>
 								</blockquote>
 
-								<h4 class="mt-5">Modeling Approach: Choosing the Right Tools</h4>
+								<h4 class="mt-5">What Does a Prediction Model Actually Do Here?</h4>
 
 								<p class="mt-3">
-									To predict member churn, two main types of machine learning models were explored: Logistic Regression and Random Forest. These models learn from data prepared in Part 2: Churn EDA, including engagement, membership length, and referral source.
+									The model looks at what a member does, how often they attend, how long they have been a member, how engaged they are, and uses those patterns to estimate how likely they are to cancel.
 								</p>
 								<p class="mt-3">
-									Model evaluation balances interpretability and predictive strength using AUC, accuracy, precision, and recall.
+									Think of it like a doctor looking at a patient's chart before symptoms appear. The model is not reacting to a member who just cancelled. It is flagging members who show the early behavioral signs of someone who typically cancels, so the studio can reach out before the decision is made.
 								</p>
+								
+								<p class="mt-3">
+									The output is a risk score for every member. The higher the score, the more likely that member is to churn. That score is what drives the tiered outreach strategy in Part 4.
+								</p>
+								
 								
 								<hr class="mt-5">
 
-								<h4 class="mt-5">Understanding the Models</h4>
-								<p class="mt-3"><b>Logistic Regression</b>: The simple, honest baseline</p>
-								<ul>
-									<li class="mb-2"><b>What it does:</b> adds up signals and gives you a churn risk score.</li>
-									<li class="mb-2"><b>Why use it:</b> easy to read and explain; quick to train.</li>
-									<li><b>Limitation:</b> it sees straight lines, so it can miss twisty patterns.</li>
-								</ul>
-
-								<p class="mt-3"><b>Random Forest</b>: Many small trees voting</p>
-								<ul>
-									<li class="mb-2"><b>What it does:</b> captures “if-this-then-that” patterns and how factors work together.</li>
-									<li class="mb-2"><b>Why use it:</b> often more accurate; highlights which features matter most.</li>
-									<li><b>Limitation:</b> harder to explain a single prediction; a bit heavier to run and deploy.</li>
-								</ul>
-
-								<hr class="mt-5" />
 								
-								<h4 class="mt-5">Which Model Performs Best?</h4>
+								<h4 class="mt-5">Two Models, Two Approaches</h4>
+
+								<p class="mt-3">Two types of models were built and compared. Each has a different philosophy.</p>
+
 								<p class="mt-3">
-									When the models were put to the test,
-									<b>Logistic Regression remains the better overall classifier for targeted retention</b>, with stronger
-									precision and slightly higher accuracy. Random Forest still recovers a few more churners (higher recall) but
-									at the cost of noisier positive flags.
+									<b>Logistic Regression</b><br />
+									Think of this as a transparent scorecard. It adds up the signals from each member's behavior, applies a
+									weight to each one, and produces a churn probability. The math is straightforward enough that you can see
+									exactly why it flagged someone. The trade-off is that it works best when the relationships between signals
+									are relatively simple and direct.
 								</p>
 
-								<table class="table table-sm mt-4">
+								<p class="mt-3">
+									<b>Random Forest</b><br />
+									Think of this as a committee of decision makers. It builds 100 different decision trees, each looking at the
+									data slightly differently, and takes a vote. It is better at picking up on complex patterns like "members
+									who are young, relatively new, and attend fewer than 2 classes per week are at high risk." The trade-off is
+									that it is harder to explain any single prediction.
+								</p>
+
+								<p class="mt-3">
+									Both models were evaluated on the same test set of 625 members, held back from training so the results
+									reflect real-world performance rather than memorization.
+								</p>
+
+								<hr class="mt-5" />
+
+								<h4 class="mt-5">Which Model Won?</h4>
+
+								<p class="mt-3">Logistic Regression is the better choice for this use case.</p>
+
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
 									<thead>
-										<tr>
-											<th>Model</th>
-											<th>AUC</th>
-											<th>Accuracy</th>
-											<th>Precision (churn)</th>
-											<th>Recall (churn)</th>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Metric</th>
+											<th style="padding: 10px 14px; text-align: left">Logistic Regression</th>
+											<th style="padding: 10px 14px; text-align: left">Random Forest</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>Logistic Regression</td>
-											<td>0.650</td>
-											<td>0.678</td>
-											<td>0.577</td>
-											<td>0.294</td>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Accuracy</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">67.8%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">61.0%</td>
 										</tr>
 										<tr>
-											<td>Random Forest</td>
-											<td>0.610</td>
-											<td>0.610</td>
-											<td>0.426</td>
-											<td>0.344</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Precision (churn flags)</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">57.7%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">42.6%</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Recall (churners caught)</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">29.4%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">34.4%</strong>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px">AUC</td>
+											<td style="padding: 9px 14px"><strong style="color: #1a6b52">0.650</strong></td>
+											<td style="padding: 9px 14px">0.610</td>
 										</tr>
 									</tbody>
 								</table>
 
-								<h5 class="mt-5">Confusion Matrix Takeaways (Test Set)</h5>
-								<p class="mt-3">This scorecard details:</p>
-								<ul class="mt-2">
-									<li class="mb-2"><b>True Positives</b>: Members correctly predicted to churn.</li>
-									<li class="mb-2"><b>True Negatives</b>: Members correctly predicted to not churn.</li>
-									<li class="mb-2"><b>False Positives</b>: Members predicted to churn, but didn't (wasted intervention effort).</li>
-									<li><b>False Negatives</b>: Members predicted to not churn, but did (missed opportunity to intervene).</li>
-								</ul>
 								<p class="mt-4">
-									<b>Logistic Regression proved more effective at accurately flagging
-									churners without generating as many misleading alerts</b>. While Random Forest identified a slightly higher
-									percentage of actual churners (recall at <b>0.344</b> vs. Logistic Regression’s <b>0.294</b>), Logistic Regression’s
-									notably better precision (<b>0.577</b> vs. <b>0.426</b>) and overall accuracy (<b>0.678</b> vs. <b>0.610</b>) mean its positive
-									predictions are much more reliable. This makes Logistic Regression the more practical choice for targeted
-									interventions, leading to more efficient and effective retention campaigns.
+									<strong>Accuracy</strong> is the percentage of all predictions that the model got right. Logistic Regression
+									is correct 67.8% of the time overall.
 								</p>
-								<a class="image-popup" href="static/img/model/confusion_matrix.png">
-									<img src="static/img/model/confusion_matrix.png" alt="Confusion Matrix" />
+
+								<p class="mt-3">
+									<strong>Precision</strong> is the more important number for this use case. Of all the members the model
+									flagged as at-risk, how many actually churned? At 57.7%, Logistic Regression is right more than half the
+									time when it raises a flag. Random Forest is only right 42.6% of the time, meaning more than half its flags
+									would be wasted outreach effort.
+								</p>
+
+								<p class="mt-3">
+									<strong>Recall</strong> measures how many actual churners the model caught. Random Forest catches slightly
+									more (34.4% vs 29.4%) but at the cost of flagging far more members who were never going to leave. For a
+									studio with limited staff time, precision matters more than recall.
+								</p>
+
+								<p class="mt-3">
+									<strong>AUC</strong> measures overall ranking ability from 0.0 to 1.0. Think of it as the probability that
+									the model ranks a random churner as higher risk than a random non-churner. A score of 0.50 is a coin flip.
+									0.60 to 0.70 is modest but useful. 0.80 and above is strong. Logistic Regression at 0.650 outperforms Random
+									Forest at 0.610. Both are operationally useful.
+								</p>
+
+								<h5 class="mt-5">Confusion Matrix</h5>
+
+								<p class="mt-3">
+									The confusion matrix breaks down exactly what the model got right and wrong on the 625-member test set.
+								</p>
+
+								<ul class="mt-2">
+									<li class="mb-2">
+										<strong>True Positives (64):</strong> Members correctly flagged as likely to churn. These are the
+										intervention opportunities.
+									</li>
+									<li class="mb-2">
+										<strong>True Negatives (360):</strong> Members correctly identified as likely to stay. No action needed.
+									</li>
+									<li class="mb-2">
+										<strong>False Positives (47):</strong> Members flagged as at-risk who were actually fine. Wasted
+										outreach effort, but a manageable number.
+									</li>
+									<li class="mb-2">
+										<strong>False Negatives (154):</strong> Members who churned but were not flagged. These are the missed
+										opportunities and the main limitation of the model at this precision setting.
+									</li>
+								</ul>
+
+								<p class="mt-3">
+									Logistic Regression's 47 false positives compare favorably to Random Forest's 101. Fewer false positives
+									means less wasted staff time on members who were never at risk.
+								</p>
+
+								<a class="image-popup" href="static/img/churn/model/confusion_matrix.png">
+									<img src="static/img/churn/model/confusion_matrix.png" alt="Confusion Matrix" />
+								</a>
+
+								<h5 class="mt-5">ROC Curve</h5>
+
+								<p class="mt-3">
+									The ROC curve shows all possible trade-offs between catching real churners and falsely flagging members who
+									were going to stay. The x-axis is the false positive rate. The y-axis is the true positive rate. The
+									diagonal line is random guessing. Any curve above it is doing better than chance. Curves closer to the
+									top-left corner are stronger.
+								</p>
+
+								<p class="mt-3">
+									The Logistic Regression curve sits above the Random Forest curve across most of the chart, confirming its
+									higher AUC. Both curves are modest, which is consistent with the nature of this dataset. The signal is real
+									but the behavioral patterns are not perfectly separable.
+								</p>
+
+								<a class="image-popup" href="static/img/churn/model/roc_side_by_side.png">
+									<img src="static/img/churn/model/roc_side_by_side.png" alt="ROC Curve" />
 								</a>
 								
 								
-								
-								
-								
-								<h5 class="mt-4">AUC (Area Under the Curve)</h5>
-								<p class="mt-3">
-									<b>AUC</b> was used to illustrate overall predictive power. This score measures overall ranking power from 0.0 to 1.0 (higher is better). It indicates how well a model distinguishes between churners and non-churners, with higher scores being better.
-								</p>
-								<ul>
-									<li class="mb-2"><b>Logistic Regression</b> achieved an AUC of <b>0.65</b>, indicating good predictive capability.</li>
-									<li>In comparison, <b>Random Forest</b> had an AUC of <b>0.61</b>, showing it was slightly less effective.</li>
-								</ul>
-								
-								<a class="image-popup" href="static/img/model/ROC.png">
-									<img src="static/img/model/roc_side_by_side.png" alt="ROC" />
-								</a>
-								
-								<h5 class="mt-4">Chart Interpretation</h5>
-								<ul class="mt-4">
-									<li class="mb-3"><b>What’s on the axes:</b><br>
-										The x-axis is False Positive Rate (how often we flag a non-churner), the y-axis is True Positive Rate (how many real churners we catch).</li>
-									<li class="mb-3"><b>The diagonal line:</b><br>
-										That’s random guessing. Any curve above it is doing better than chance. Curves closer to the top-left are stronger (more true positives with fewer false positives).
-									<li class="mb-3"><b>AUC in one sentence:</b><br>
-										AUC is the area under the ROC curve. It’s the chance that the model ranks a random churner higher-risk than a random non-churner.
-										0.50 = coin flip, 0.60–0.70 = modest but useful, 0.80+ = strong (context matters).
-									</li>
-									<li class="mb-3"><b>Comparing the lines:</b><br>
-										The Logistic Regression curve sits above the Random Forest curve overall, so its AUC is higher (LR ~0.650 vs RF ~0.610 in my tests). That means LR separates churners/non-churners a bit better on average.
-									</li>
-									<li class="mb-3"><b>Picking a point on the curve (threshold):</b><br>
-										The ROC curve shows all possible trade-offs. You choose <b>one operating point</b> (a probability cut-off) based on cost/benefit:
-									</li>
-								</ul>
-								
 
-								
+								<hr class="mt-5" />
 
-								
-								<hr class="mt-5">
+								<h4 class="mt-5">What Drives Churn? The Top Predictors</h4>
 
-								<h4 class="mt-5">What Factors Drive Churn Risk? (Feature Importance)</h4>
-								<p class="mt-3">
-									Beyond prediction, understanding <em>why</em> guides action. For targeting, Logistic Regression is the operational
-									pick due to its higher precision (<b>0.577</b>) and accuracy (<b>0.678</b>) making positive flags more trustworthy. For the why,
-									Random Forest is the clearer lens. It captures non-linearities and interactions, so its feature importances
-									tell a richer, easier-to-explain story than LR’s log-odds coefficients.
-								</p>
-								<p class="mt-3">
-									The model shows <b>age, recent engagement, and tenure</b> as the strongest signals, with <b>pricing</b> also playing a secondary role.
-								</p>
+								<p class="mt-3">The model tells you not just who is at risk but why. These are the five factors that matter most.</p>
+								
+								<p class="mt-3">Random Forest was used for feature importance because it captures more complex patterns than Logistic Regression, even though Logistic Regression was selected as the operational model.</p>
+								
 								<div class="container">
 									<div class="row">
 										<div class="col-12 col-md-12">
 											<div class="embed-responsive embed-responsive-16by9">
 												<iframe
 													class="embed-responsive-item"
-													src="static/img/model/rf_feature_importance_top5.html"
+													src="static/img/churn/model/rf_feature_importance_top5.html"
 													title="RF Feature Importance"
 													loading="lazy"
 													allowfullscreen
@@ -291,53 +305,51 @@
 										</div>
 									</div>
 								</div>
-
-								<p class="mt-3">Here's a breakdown of the top five drivers and what they tell us:</p>
-								<ul class="mt-3">
-									<li class="mb-2">
-										<b>Age</b>: Older members tend to be more stable; younger members may have more transient engagement.
-									</li>
-									<li class="mb-2">
-										<b>Avg Weekly Classes (Last 6 Months)</b>: Recent drops in attendance frequency are a key early-warning
-										signal for disengagement.
-									</li>
-									<li class="mb-2">
-										<b>Membership Tenure (Months)</b>: Churn risk drops sharply after six months. Long-term members are more
-										embedded in routines.
-									</li>
-									
-									<li class="mb-2">
-										<b>Engagement Score</b>: Measures attendance consistency. High engagement means less churn, reinforcing
-										habit-building value.
-									</li>
-
-
-									<li>
-										<b>Monthly Membership Cost</b>: Members on higher-priced plans churn slightly more unless engagement stays high—price sensitivity shows up as a secondary driver.
-									</li>
-								</ul>
-
-								<hr class="mt-5">
-
-								<h4 class="mt-5">Key Modeling Insights for Action</h4>
-								<p class="mt-3">
-									The modeling phase provided critical insights that move beyond just understanding churn to proactively managing it:
-								</p>
-								<ul class="mt-3">
-									<li class="mb-2"><b>Reliable baseline targeting</b>: Logistic Regression reaches 0.678 accuracy with 0.577 precision on churn positives, making its alerts actionable without excessive noise.</li>
-									<li class="mb-2"><b>Targeted Retention Efforts</b>: By minimizing false positives (incorrectly flagged members), the Logistic Regression model ensures retention resources are efficiently focused.</li>
-									<li class="mb-2"><b>Understanding the "Why"</b>: Beyond prediction, the model clearly highlights engagement and tenure as the dominant drivers of churn, reinforcing the need for programs that build early habits and foster long-term commitment.</li>
-									<li><b>Data-Driven Decision Making</b>: Model outputs provide a clear, quantifiable basis for prioritizing retention efforts, allocating resources, and designing personalized strategies, moving away from guesswork.</li>
-								</ul>
 								
-								<hr class="mt-5">
+								<p class="mt-3">
+									<b>Age</b><br>
+									Younger members churn at higher rates. They tend to have more transient schedules and less established fitness habits. Age alone is not actionable, but it informs how to segment outreach.
+								</p>
+								
+								<p class="mt-3">
+									<b>Weekly class attendance (23.0%)</b><br>
+									The number of classes a member attends per week over the past six months is one of the strongest early warning signals. A drop in frequency is often the first visible sign of disengagement before a cancellation happens.
+								</p>
+								
+								<p class="mt-3">
+									<b>Membership tenure (22.6%)</b><br>
+									The longer someone has been a member, the less likely they are to leave. The first six months are the highest-risk window, which is consistent with what the EDA showed. Getting a new member through that window is the highest-return retention investment.
+								</p>
+								
+								<p class="mt-3">
+									<b>Engagement score (21.0%)</b><br>
+									A composite measure of overall activity and consistency. Members with declining engagement scores are significantly more likely to churn. This is the single most actionable signal for proactive outreach because it is visible before the member stops showing up entirely.
+								</p>
+								
+								<p class="mt-3">
+									<b>Monthly membership cost (4.9%)</b><br>
+									Higher-priced memberships are associated with slightly higher churn, particularly when engagement is low. Price sensitivity becomes a factor when members are not feeling the value of what they are paying for.
+								</p>
+								
+								<p class="mt-3">
+									<b>What did not matter: auto-renew status (1.9%)</b><br>
+									Consistent with the EDA finding, whether a member is on auto-renew has almost no predictive power. The billing preference is not the driver. The behavior behind the billing is.
+								</p>
+								
+								<hr class="mt-5" />
+
+								<h4 class="mt-5">What This Sets Up</h4>
+
+								<p class="mt-3">
+									The model produces a churn risk score for every member. That score is what drives the tiered outreach strategy in Part 4. High-risk members get direct personal outreach. Medium-risk members get targeted digital communication. Low-risk members get general loyalty programming.
+								</p>
+								
+
 
 								
 								<!-- UP NEXT -->
 								<h4 class="mt-5"><b>Up Next</b>: Part 4 - Strategic Recommendations</h4>
-								<p class="pt-3">
-									With modeling complete, Part 4 will focus on strategy and recommendations moving forward.
-								</p>
+
 
 								<a href="churn-prediction-p2-eda.html" class="btn btn-dark btn-sm mt-3" role="button">
 									<i class="fa fa-chevron-left"></i> Part 2: Churn EDA

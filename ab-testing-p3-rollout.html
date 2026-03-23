@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>Jim Fischer</title>
+
+		<!-- Font Icon -->
+		<link href="static/plugin/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+		<link href="static/plugin/themify-icons/themify-icons.css" rel="stylesheet" />
+
+		<!-- Plugin CSS -->
+		<link href="static/plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="static/plugin/owl-carousel/css/owl.carousel.min.css" rel="stylesheet" />
+		<link href="static/plugin/magnific/magnific-popup.css" rel="stylesheet" />
+
+		<!-- Theme Style -->
+		<link href="static/css/styles.css" rel="stylesheet" />
+		<link href="static/css/color/color-1.css" rel="stylesheet" id="color_theme" />
+		<link rel="icon" href="favicon.ico" />
+	</head>
+
+	<body data-spy="scroll" data-target="#navbarRyan" data-offset="98">
+		<!-- Loading Spinner -->
+		<div id="loading">
+			<div class="load-circle"><span class="one"></span></div>
+		</div>
+
+		<!-- Header -->
+		<header>
+			<nav class="navbar header-nav header-nav fixed-top navbar-expand-lg">
+				<div class="container">
+					<a class="navbar-brand" href="index.html">Jim <span class="theme-bg"></span></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarRyan">
+						<span></span><span></span><span></span>
+					</button>
+					<div class="collapse navbar-collapse justify-content-end" id="navbarRyan">
+						<ul class="navbar-nav">
+							<li><a class="nav-link" href="index.html#home">Home</a></li>
+							<li><a class="nav-link" href="index.html#aboutus">About</a></li>
+							<li><a class="nav-link" href="index.html#portfolio">Projects</a></li>
+							<li><a class="nav-link" href="index.html#contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<!-- Main -->
+		<main>
+			<section class="page-title" style="background-color: #212a31">
+				<div class="container"></div>
+			</section>
+
+			<section class="section blog-lising">
+				<div class="container">
+					<div class="row">
+						<!-- Content Area -->
+						<div class="col-12 col-md-12 col-lg-9 p-50px-r md-p-15px-r">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html#portfolio">Projects</a></li>
+									<li class="breadcrumb-item">
+										<a href="ab-testing.html">Payment Recovery A/B Testing</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">
+										Evidence-Driven Rollout
+									</li>
+								</ol>
+							</nav>
+
+							<div class="bog-content-area">
+								<h2 class="mt-5">Part 3: Evidence-Driven Rollout</h2>
+								<blockquote class="blockquote-left mt-5">
+									The statistical case has been made. Now what?<br /><br />
+									
+									This section translates the Bayesian results from Part 2 into a concrete business recommendation: which segments to target, in what order, and what the revenue impact looks like. The goal is a rollout plan that a leadership team can act on with confidence.<br><br>
+
+									
+									<a
+										href="https://github.com/JF-30000/churn_prediction/blob/main/01_etl.ipynb"
+										target="_blank"
+										>View full notebook on GitHub <i class="fa fa-chevron-right"></i></a
+									><br />
+								</blockquote>
+
+								<h4 class="mt-5">Why Not Deploy to Everyone at Once?</h4>
+
+								<p class="mt-3">
+									Some segments showed overwhelming evidence. Others showed a lift that looks promising but whose statistical range includes zero, meaning the true effect could be neutral or even slightly negative. Deploying to those groups before the evidence is conclusive is not actionable. 
+								</p>
+								<p class="mt-3">
+									A phased rollout captures most of the revenue opportunity immediately, builds real-world confidence in the intervention, and preserves the discipline to hold back where the data says wait.
+								</p>
+								
+								
+								<hr class="mt-5" />
+								
+								
+								<h4 class="mt-5">The Rollout Plan</h4>
+								<p class="mt-3">
+									Deploy where the evidence is strongest first, monitor the rest, and do not commit to the weaker segments
+									until live data backs it up.
+								</p>
+
+								<p class="mt-3">
+									Two criteria determine when a segment is ready for deployment: P(B&gt;A) needs to be high, and the 90%
+									credible interval on lift needs to be entirely positive. Both conditions need to be met.
+								</p>
+
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
+									<thead>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Phase</th>
+											<th style="padding: 10px 14px; text-align: left">Segment</th>
+											<th style="padding: 10px 14px; text-align: left">Lift</th>
+											<th style="padding: 10px 14px; text-align: left">P(B&gt;A)</th>
+											<th style="padding: 10px 14px; text-align: left">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>Phase 1 — Immediate</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">First-time missers</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">+9.5%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">99.9%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<span
+													style="
+														background-color: #1a6b52;
+														color: #ffffff;
+														padding: 3px 10px;
+														border-radius: 4px;
+														font-weight: bold;
+														font-size: 0.85em;
+													"
+													>Deploy Now</span
+												>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>Phase 2 — 30 Days</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Repeat 1-month delinquents</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #124e66">+2.6%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #124e66">95.6%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<span
+													style="
+														background-color: #124e66;
+														color: #ffffff;
+														padding: 3px 10px;
+														border-radius: 4px;
+														font-weight: bold;
+														font-size: 0.85em;
+													"
+													>Deploy at 30 Days</span
+												>
+											</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong>Phase 3 — Monitor</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Repeat 2-month delinquents</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">+3.0%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">94.2%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<span
+													style="
+														background-color: #748d92;
+														color: #ffffff;
+														padding: 3px 10px;
+														border-radius: 4px;
+														font-weight: bold;
+														font-size: 0.85em;
+													"
+													>Monitor</span
+												>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px"><strong>Hold</strong></td>
+											<td style="padding: 9px 14px">High-risk chronic delinquents</td>
+											<td style="padding: 9px 14px">+2.2%</td>
+											<td style="padding: 9px 14px">89.3%</td>
+											<td style="padding: 9px 14px">
+												<span
+													style="
+														background-color: #8b3a3a;
+														color: #ffffff;
+														padding: 3px 10px;
+														border-radius: 4px;
+														font-weight: bold;
+														font-size: 0.85em;
+													"
+													>Do Not Deploy</span
+												>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+								
+								<p class="mt-5">
+										<a class="image-popup" href="static/img/ab-testing/impact_phased_rollout.png ">
+											<img src="static/img/ab-testing/impact_phased_rollout.png " alt="impact_phased_rollout" />
+										</a>
+								</p>
+
+								
+								
+								<hr class="mt-5" />
+
+								<h4 class="mt-5">Revenue Impact</h4>
+								<p class="mt-3">
+									Three scenarios were built using the 90% credible interval bounds from Part 2 as the floor and ceiling. The
+									average outstanding balance per member from the dataset ($1,333 USD) and an estimated monthly delinquent
+									volume scaled from the experiment population drive the calculation.
+								</p>
+
+								<table style="width: 100%; border-collapse: collapse; font-size: 0.95em">
+									<thead>
+										<tr style="background-color: #2e3944; color: #d3d9d4">
+											<th style="padding: 10px 14px; text-align: left">Scenario</th>
+											<th style="padding: 10px 14px; text-align: left">Lift</th>
+											<th style="padding: 10px 14px; text-align: left">Additional Recoveries</th>
+											<th style="padding: 10px 14px; text-align: left">Additional Annual Revenue</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">Conservative (CI lower bound)</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">+3.2%</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">407 members</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">$542,024</td>
+										</tr>
+										<tr>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0"><strong>Expected</strong></td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">+5.2%</strong>
+											</td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0"><strong>661 members</strong></td>
+											<td style="padding: 9px 14px; border-bottom: 1px solid #e0e0e0">
+												<strong style="color: #1a6b52">$880,789</strong>
+											</td>
+										</tr>
+										<tr style="background-color: #f7f9fa">
+											<td style="padding: 9px 14px">Optimistic (CI upper bound)</td>
+											<td style="padding: 9px 14px">+7.3%</td>
+											<td style="padding: 9px 14px">928 members</td>
+											<td style="padding: 9px 14px">$1,236,493</td>
+										</tr>
+									</tbody>
+								</table>
+								
+								<p class="mt-5">
+										<a class="image-popup" href="static/img/ab-testing/impact_scenario_analysis.png ">
+											<img src="static/img/ab-testing/impact_scenario_analysis.png " alt="impact_scenario_analysis" />
+										</a>
+								</p>
+								
+								<p class="mt-5">
+									The phased rollout covering Phases 1 through 3 generates an estimated $708,038 in annual revenue. That is 80% of the expected full-population figure, captured while holding back the segments where the evidence is not yet conclusive.
+								</p>
+								
+								<p class="mt-5">
+									The remaining 20% is not abandoned. It is waiting for stronger data.
+								</p>
+								
+								
+								<hr class="mt-5" />
+								
+								
+								<h4 class="mt-5">Beyond the Payment</h4>
+								<p class="mt-3">
+									Recovering a payment is the primary goal, but it is not the only outcome worth considering. In
+									subscription-based businesses like SaaS, fintech, and consumer lending, do customers who resolve a billing
+									issue more likely to stay? The act of working through a friction point and coming out the other side could
+									strengthen the relationship rather than damage it. A well-handled billing moment can actually build trust.
+								</p>
+
+								<p class="mt-3">
+									Healthcare is a different story. Patients do not churn the way SaaS subscribers do. They leave a provider
+									for reasons that have little to do with billing: insurance changes, moving, switching doctors, or simply not
+									needing care. The churn reduction argument is weaker in a pure healthcare context and should not be leaned
+									on without internal data to support it.
+								</p>
+
+								<p class="mt-3">
+									Where it applies most directly is in healthcare-adjacent subscription models: mental health platforms,
+									telehealth subscriptions, and wellness apps where a member pays a recurring fee for ongoing access to care.
+									In those contexts the logic holds more directly. A member who resolves a billing issue and stays enrolled is
+									worth more than the payment itself.
+								</p>
+
+								<p class="mt-3">
+									To illustrate the potential downstream impact: if recovered members were even 15% less likely to churn
+									within 90 days, that would translate to roughly 20 avoided churns per year and approximately $23,800 in
+									retained lifetime value based on the 661 additional annual recoveries expected under the empathetic
+									messaging rollout. These figures are illustrative assumptions, not cited benchmarks. They are included to
+									show the shape of the downstream impact, not to make a precise financial claim. They should be validated
+									against internal retention data before any business decision is made.
+								</p>
+								
+								<hr class="mt-5" />
+								
+								
+								<h4 class="mt-5">Limitations Worth Naming</h4>
+								<p class="mt-3">
+									The dataset is a stand-in. A credit card dataset was used as a proxy for healthcare billing data. Real-world lift may differ based on industry dynamics, patient relationships, and message delivery channels.
+								</p>
+								
+								<p class="mt-3">
+									The messages were never actually sent. Outcomes were simulated from behavioral patterns in the data, not observed from a live experiment. The methodology is sound and transferable, but the specific lift figures should be treated as directional until validated against real deployment results.
+								</p>
+								
+								<p class="mt-3">
+									Alpha was relaxed. The significance threshold was set at 0.10 rather than the conventional 0.05. This is a documented design decision justified by the low-cost and reversible nature of the intervention. The Bayesian credible intervals communicate the resulting uncertainty directly.
+								</p>
+								
+								
+								<hr class="mt-5" />
+								
+								
+								<h4 class="mt-5">The Bottom Line</h4>
+								<p class="mt-3">
+									Empathetic messaging outperforms transactional messaging with 99.9% probability. The lift is meaningful, the revenue impact is quantifiable, and the deployment path is sequenced by evidence rather than assumption.
+								</p>
+								
+								<p class="mt-3">
+									Start with first-time missers. Measure what happens. Let the real-world data take it from there.
+								</p>
+								
+								
+								<hr class="mt-5" />
+								
+								
+								<h4 class="mt-5">Wrapping Up</h4>
+								<p class="mt-3">
+									This project demonstrates an end-to-end analytics workflow: from raw data and pipeline design through
+									experiment design, Bayesian modeling, segmentation, and a revenue-backed business recommendation. The same framework applies to any context where a binary outcome, an
+									outreach decision, and a segmented population come together.
+								</p>
+								
+								<p class="mt-3">
+									Thanks for taking the time to explore this project. If you have questions about the methodology, the
+									findings, or how this approach might apply to a specific business problem, I would love to connect.
+								</p>
+
+
+								<!-- Navigation Buttons -->
+								<a href="ab-testing.html" class="btn btn-dark btn-sm mt-3" role="button">
+									<i class="fa fa-chevron-left"></i> Project Home
+								</a>
+							</div>
+						</div>
+
+						<!-- SIDE BAR -->
+						<div class="col-12 col-md-12 col-lg-3 md-m-30px-b mt-5">
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">SECTIONS</h5>
+								<div class="widget-categories">
+									<ul class="list-style-1">
+										<li>
+											<a href="ab-testing-p1-data-prep.html"
+												>Part 1: Data Prep &amp; EDA</a
+											>
+										</li>
+										<li>
+											<a href="ab-testing-p2-bayesian-ab-test.html"
+												>Part 2: Bayesian A/B Test</a
+											>
+										</li>
+										<li>
+											<a href="#.html"
+												>Part 3: Evidence-Driven Rollout</a
+											>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">GITHUB REPO</h5>
+								<div class="widget-categories">
+									<ul class="list-style-1">
+										<!--<li><a href="https://github.com/JF-30000/churn_prediction" target="_blank"><i class="fab fa-github-alt"></i> Churn Prediction</a></li>-->
+									</ul>
+								</div>
+							</div>
+
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">TECH STACK</h5>
+								<div class="widget-popular-tag">
+									<ul class="list-style-tag">
+										<li>Python</li>
+										<li>Pandas</li>
+										<li>NumPy</li>
+										<li>SciPy</li>
+										<li>Matplotlib</li>
+										<li>Seaborn</li>
+										<li>Jupyter</li>
+										<li>GitHub</li>
+									</ul>
+								</div>
+							</div>
+
+							<div class="sidebar-widget">
+								<h5 class="widget-title font-alt">FOCUS AREAS</h5>
+								<div class="widget-popular-tag">
+									<ul class="list-style-tag">
+										<li>Bayesian A/B Testing</li>
+										<li>Experiment Design</li>
+										<li>Statistical Analysis</li>
+										<li>Segmentation</li>
+										<li>Revenue Forecasting</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- /.END SIDE BAR -->
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer -->
+		<footer class="footer footer-blog">
+			<div class="container">
+				<div class="footer-logo">
+					<span>Jim Fischer <span class="theme-bg"></span></span>
+				</div>
+				<ul class="social-icons">
+					<li>
+						<a href="https://github.com/JF-30000?tab=repositories" target="_blank"
+							><i class="fab fa-github-alt"></i
+						></a>
+					</li>
+					<li>
+						<a href="https://www.linkedin.com/in/jamesafischer" target="_blank"
+							><i class="fab fa-linkedin-in"></i
+						></a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+
+		<!-- Scripts -->
+		<script src="static/js/jquery-3.2.1.min.js"></script>
+		<script src="static/js/jquery-migrate-3.0.0.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$(".image-popup").magnificPopup({
+					type: "image",
+					mainClass: "mfp-with-zoom",
+					zoom: { enabled: true, duration: 300, easing: "ease-in-out" },
+					image: { verticalFit: true }
+				});
+			});
+		</script>
+		<script src="static/plugin/bootstrap/js/popper.min.js"></script>
+		<script src="static/plugin/bootstrap/js/bootstrap.min.js"></script>
+		<script src="static/plugin/owl-carousel/js/owl.carousel.min.js"></script>
+		<script src="static/plugin/isotope/isotope.pkgd.min.js"></script>
+		<script src="static/plugin/magnific/jquery.magnific-popup.min.js"></script>
+		<script src="static/js/custom.js"></script>
+	</body>
+</html>
